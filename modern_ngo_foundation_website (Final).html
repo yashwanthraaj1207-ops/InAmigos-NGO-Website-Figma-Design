@@ -1,0 +1,2026 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InAmigos Foundation – Premium UI/UX Redesign Concept</title>
+    
+    <!-- Google Fonts: Plus Jakarta Sans for Apple-like refined typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome for high-fidelity vector icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brandGreen: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                        },
+                        brandBlue: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                        },
+                        neutralDark: '#0f172a',
+                    },
+                    boxShadow: {
+                        'premium': '0 20px 50px -12px rgba(15, 23, 42, 0.08)',
+                        'hoverUp': '0 30px 60px -15px rgba(16, 185, 129, 0.15)',
+                        'glowBlue': '0 25px 50px -12px rgba(14, 165, 233, 0.25)',
+                        'glowGreen': '0 25px 50px -12px rgba(16, 185, 129, 0.25)',
+                        'glassGlow': '0 8px 32px 0 rgba(31, 38, 135, 0.04)',
+                        'bentoGlow': '0 0 40px 5px rgba(14, 165, 233, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f8fafc;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 99px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        
+        /* Smooth cubic-bezier transitions matching Stripe and Apple physics */
+        .smooth-transition {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(0.5deg); }
+        }
+        @keyframes float-delayed {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(10px) rotate(-0.5deg); }
+        }
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.75; transform: scale(1.02); }
+        }
+        @keyframes rotate-slow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+            animation: float-delayed 7s ease-in-out infinite;
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 12s ease-in-out infinite;
+        }
+        .animate-rotate-slow {
+            animation: rotate-slow 20s linear infinite;
+        }
+        
+        /* Glassmorphism Styles */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .glass-card-dark {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+        }
+        
+        .bento-hover {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .bento-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 30px 60px -15px rgba(15, 23, 42, 0.08), 0 0 50px 2px rgba(14, 165, 233, 0.05);
+        }
+        
+        .journey-connector {
+            stroke-dasharray: 8;
+            animation: march 20s linear infinite;
+        }
+        @keyframes march {
+            0% { stroke-dashoffset: 200; }
+            100% { stroke-dashoffset: 0; }
+        }
+    </style>
+</head>
+<body class="bg-[#f8fafc] text-slate-800 font-sans antialiased overflow-x-hidden">
+
+    <!-- COLLAPSIBLE PRESENTATION CONTROL DRAWER (Collapsed by default on page load) -->
+    <div id="caseStudyDrawer" class="fixed top-24 left-6 z-50 bg-slate-950/95 text-white rounded-3xl shadow-2xl p-6 max-w-sm border border-slate-800 transition-all duration-500 transform -translate-x-[120%] backdrop-blur-xl">
+        <div class="flex items-center justify-between mb-5 border-b border-slate-800 pb-3">
+            <div class="flex items-center gap-2">
+                <span class="flex h-2.5 w-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                <h4 class="font-extrabold text-xs tracking-wider uppercase text-emerald-400 flex items-center gap-1.5">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> UI/UX SPEC CONTROL HUD
+                </h4>
+            </div>
+            <button onclick="toggleCaseStudyDrawer()" class="text-slate-400 hover:text-white transition-colors p-1 rounded-xl hover:bg-slate-800">
+                <i class="fa-solid fa-chevron-left text-sm"></i>
+            </button>
+        </div>
+        
+        <div class="space-y-4">
+            <div>
+                <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2">Overlay Blueprints</span>
+                <div class="grid grid-cols-2 gap-2">
+                    <button onclick="toggleDesignGrid()" id="btnGrid" class="px-3 py-2.5 text-xs font-bold rounded-xl bg-slate-900 border border-slate-800 hover:bg-slate-800 hover:text-white smooth-transition text-center flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-columns text-sky-400"></i> 12-Col Grid
+                    </button>
+                    <button onclick="toggleWireframes()" id="btnWireframe" class="px-3 py-2.5 text-xs font-bold rounded-xl bg-slate-900 border border-slate-800 hover:bg-slate-800 hover:text-white smooth-transition text-center flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-circle-nodes text-emerald-400"></i> Wireframe Mode
+                    </button>
+                </div>
+            </div>
+
+            <div class="space-y-2.5 pt-3 border-t border-slate-800">
+                <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block">Design Tokens</span>
+                <div class="grid grid-cols-2 gap-2 text-[10px] text-slate-300">
+                    <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                        <span class="text-slate-500 block text-[8px] font-black uppercase">Primary Emerald</span>
+                        <div class="flex items-center gap-1.5 mt-1">
+                            <span class="w-2.5 h-2.5 rounded bg-emerald-500"></span>
+                            <code class="text-emerald-400">#10B981</code>
+                        </div>
+                    </div>
+                    <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                        <span class="text-slate-500 block text-[8px] font-black uppercase">Accent Sky Blue</span>
+                        <div class="flex items-center gap-1.5 mt-1">
+                            <span class="w-2.5 h-2.5 rounded bg-sky-500"></span>
+                            <code class="text-sky-400">#0EA5E9</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-3 border-t border-slate-800">
+                <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1.5">Interactive Milestones</span>
+                <ul class="space-y-1.5 text-xs text-slate-300">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-xs"></i> <span>Bento Grid Donation Module</span></li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-xs"></i> <span>Telemetry Operational Map Node</span></li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-xs"></i> <span>Interactive Before/After Story Panel</span></li>
+                    <li class="flex items-center gap-2 text-sky-300"><i class="fa-solid fa-brain text-sky-400 text-xs"></i> <span>Gemini AI Integration Active</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- FLOATING HUD BUTTON (Repositioned to the bottom-right to keep the Hero Section completely unblocked) -->
+    <button id="restoreHudBtn" onclick="toggleCaseStudyDrawer()" class="fixed bottom-6 right-6 z-50 bg-slate-950 text-white hover:text-emerald-400 rounded-2xl px-5 py-4 shadow-2xl hover:scale-105 smooth-transition flex items-center justify-center gap-2.5 border border-slate-800 font-extrabold text-xs">
+        <span class="relative flex h-2 w-2 shrink-0">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+        </span>
+        <i class="fa-solid fa-wand-magic-sparkles text-emerald-400"></i> Show Spec HUD
+    </button>
+
+    <!-- FLOATING GEMINI AI ASSISTANT TRIGGER (Repositioned to bottom-left to prevent collision) -->
+    <button onclick="toggleAiAssistant()" class="fixed bottom-6 left-6 z-50 bg-gradient-to-tr from-brandBlue-600 to-indigo-600 hover:from-indigo-600 hover:to-brandBlue-600 text-white rounded-2xl px-5 py-4 shadow-2xl hover:scale-105 smooth-transition flex items-center justify-center gap-2.5 border border-brandBlue-500/30 font-extrabold text-xs">
+        <span class="relative flex h-2 w-2 shrink-0">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-300 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-sky-400"></span>
+        </span>
+        <i class="fa-solid fa-brain text-sky-100"></i> Ask InAmigos AI
+    </button>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toastContainer" class="fixed top-6 right-6 z-50 pointer-events-none space-y-2"></div>
+
+    <!-- NAVIGATION BAR -->
+    <header class="sticky top-0 z-40 glass-nav smooth-transition shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-500 to-sky-500 flex items-center justify-center shadow-lg group-hover:scale-105 smooth-transition">
+                    <span class="text-white font-black text-xl tracking-tighter">IA</span>
+                </div>
+                <div>
+                    <span class="font-extrabold text-lg tracking-tight text-slate-900 block leading-none">InAmigos</span>
+                    <span class="text-[9px] text-emerald-600 tracking-widest uppercase font-black">Foundation</span>
+                </div>
+            </a>
+
+            <nav class="hidden lg:flex items-center space-x-7 font-extrabold text-xs text-slate-600 uppercase tracking-wider">
+                <a href="#about" class="hover:text-emerald-500 smooth-transition">Who We Are</a>
+                <a href="#stats" class="hover:text-emerald-500 smooth-transition">Our Impact</a>
+                <a href="#map" class="hover:text-emerald-500 smooth-transition">Analytics Map</a>
+                <a href="#campaigns" class="hover:text-emerald-500 smooth-transition">Campaigns</a>
+                <a href="#calculator" class="hover:text-emerald-500 smooth-transition">Calculator</a>
+                <a href="#stories" class="hover:text-emerald-500 smooth-transition">Success Stories</a>
+                <a href="#gallery" class="hover:text-emerald-500 smooth-transition">Gallery</a>
+                <a href="#transparency" class="hover:text-emerald-500 smooth-transition">Transparency</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <a href="#calculator" class="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-5 py-3 rounded-2xl font-extrabold text-xs tracking-wider uppercase shadow-premium hover:shadow-hoverUp smooth-transition flex items-center gap-2">
+                    Donate Now <i class="fa-solid fa-heart text-[10px]"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 12-COLUMN DESIGN GRID OVERLAY (PREVIEW MODE) -->
+    <div id="gridOverlay" class="hidden fixed inset-0 pointer-events-none z-30 max-w-7xl mx-auto px-6 grid grid-cols-12 gap-6">
+        <div class="h-full bg-red-500/5 border-x border-red-500/10"></div>
+        <div class="h-full bg-red-500/5 border-x border-red-500/10"></div>
+        <div class="h-full bg-red-500/5 border-x border-red-500/10"></div>
+        <div class="h-full bg-red-500/5 border-x border-red-500/10"></div>
+        <div class="h-full bg-red-500/5 border-x border-red-500/10"></div>
+        <div class="h-full bg-red-500/5 border-x border-red-500/10"></div>
+        <div class="h-full bg-red-500/5 border-x border-red-500/10"></div>
+        <div class="h-full bg-red-500/5 border-x border-red-500/10"></div>
+        <div class="h-full bg-red-500/5 border-x border-red-500/10"></div>
+        <div class="h-full bg-red-500/5 border-x border-red-500/10"></div>
+        <div class="h-full bg-red-500/5 border-x border-red-500/10"></div>
+        <div class="h-full bg-red-500/5 border-x border-red-500/10"></div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="relative min-h-[92vh] py-16 lg:py-24 flex items-center overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-[#070b13] text-white">
+        <!-- Interactive Stripe-Inspired Animated Background -->
+        <canvas id="particleCanvas" class="absolute inset-0 z-0 pointer-events-none opacity-50"></canvas>
+        <div class="absolute top-1/4 left-1/4 w-[450px] h-[450px] bg-emerald-500/10 rounded-full filter blur-[130px] pointer-events-none animate-pulse-slow"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] bg-sky-500/10 rounded-full filter blur-[130px] pointer-events-none animate-pulse-slow"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
+            <div class="lg:col-span-6 space-y-8 text-center lg:text-left">
+                <div class="inline-flex items-center space-x-2.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-4 py-2 rounded-full text-xs font-extrabold tracking-wide uppercase shadow-lg backdrop-blur-md animate-pulse">
+                    <span class="flex h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
+                    <span>Supporting 50,000+ Lives and Ecological Assets</span>
+                </div>
+                
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.1] tracking-tight">
+                    Together We Can <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-400 to-sky-400">Create Positive Change</span>
+                </h1>
+                
+                <p class="text-slate-300 text-base sm:text-lg lg:text-xl max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
+                    Empowering marginalized communities through scalable education modules, basic nutritional grids, healthcare drives, and active forestation.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                    <a href="#calculator" class="w-full sm:w-auto px-8 py-4.5 bg-gradient-to-r from-emerald-400 to-emerald-500 hover:from-emerald-500 hover:to-emerald-600 text-slate-950 font-black rounded-2xl shadow-glowGreen hover:-translate-y-1 smooth-transition text-center flex items-center justify-center gap-2 text-sm tracking-wider uppercase">
+                        <i class="fa-solid fa-heart"></i> Donate Now
+                    </a>
+                    <a href="#volunteer" class="w-full sm:w-auto px-8 py-4.5 bg-white/10 hover:bg-white/20 text-white font-extrabold rounded-2xl border border-white/20 hover:border-white/40 backdrop-blur-md hover:-translate-y-1 smooth-transition text-center flex items-center justify-center gap-2 text-sm tracking-wider uppercase">
+                        Become a Volunteer <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Apple-Inspired Glassmorphic Bento Illustration -->
+            <div class="lg:col-span-6 relative flex justify-center items-center h-[520px]">
+                <div class="absolute w-[380px] h-[380px] bg-gradient-to-tr from-emerald-500/20 to-sky-500/20 rounded-full filter blur-[100px] pointer-events-none animate-pulse-slow"></div>
+
+                <!-- Floating Bento Card 1: Education (Smiling Children Concept) -->
+                <div class="absolute top-4 left-6 sm:left-12 w-64 p-5 rounded-[2.5rem] glass-card-dark text-white shadow-premium border border-white/10 transform -rotate-3 hover:rotate-0 hover:scale-105 hover:z-20 smooth-transition cursor-pointer animate-float">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-[10px] bg-emerald-500/20 text-emerald-400 font-black px-3 py-1 rounded-full border border-emerald-500/30 uppercase tracking-widest">Education</span>
+                        <div class="w-8 h-8 rounded-xl bg-emerald-500/15 flex items-center justify-center text-emerald-400"><i class="fa-solid fa-graduation-cap"></i></div>
+                    </div>
+                    <!-- Custom SVG representing Children & Literacy -->
+                    <div class="h-32 bg-gradient-to-br from-emerald-500/20 to-sky-500/20 rounded-3xl flex items-center justify-center overflow-hidden mb-4 relative border border-white/5">
+                        <svg class="w-20 h-20 text-teal-300 opacity-80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="40" r="16" stroke="currentColor" stroke-width="3" />
+                            <path d="M25,80 C25,65 35,55 50,55 C65,55 75,65 75,80" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+                            <path d="M50,15 L70,30 L30,30 Z" fill="currentColor" opacity="0.3" />
+                        </svg>
+                    </div>
+                    <h3 class="font-extrabold text-sm text-white">Interactive Classrooms</h3>
+                    <p class="text-[11px] text-slate-400 mt-1 leading-relaxed">Instating learning materials and support packages.</p>
+                </div>
+
+                <!-- Floating Bento Card 2: Plantations (Ecological Drive) -->
+                <div class="absolute bottom-6 left-2 sm:left-4 w-56 p-5 rounded-[2.5rem] glass-card text-slate-800 shadow-premium border border-white/40 transform rotate-6 hover:rotate-0 hover:scale-105 hover:z-20 smooth-transition cursor-pointer animate-float-delayed">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-[9px] bg-sky-100 text-sky-800 font-black px-3 py-1 rounded-full uppercase tracking-wider">ECO ACTION</span>
+                        <div class="w-8 h-8 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600"><i class="fa-solid fa-leaf"></i></div>
+                    </div>
+                    <!-- Custom Plant SVG -->
+                    <div class="h-28 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 rounded-2xl flex items-center justify-center overflow-hidden mb-4 border border-emerald-500/10">
+                        <svg class="w-16 h-16 text-emerald-600" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M50,85 L50,45" stroke="currentColor" stroke-width="4" stroke-linecap="round" />
+                            <path d="M50,55 Q65,45 60,30 C50,25 45,45 50,55 Z" fill="currentColor" opacity="0.4" stroke="currentColor" stroke-width="2" />
+                            <path d="M50,65 Q35,55 40,40 C50,35 55,55 50,65 Z" fill="currentColor" stroke="currentColor" stroke-width="2" />
+                        </svg>
+                    </div>
+                    <h3 class="font-black text-xs text-slate-900">Afforestation Assets</h3>
+                    <p class="text-[10px] text-slate-500 mt-1">Establishing healthy tree systems on secure plots.</p>
+                </div>
+
+                <!-- Floating Bento Card 3: Community Volunteers -->
+                <div class="absolute right-2 sm:right-6 top-1/4 w-60 p-5 rounded-[2.5rem] glass-card-dark text-white shadow-premium border border-white/10 transform rotate-2 hover:rotate-0 hover:scale-105 hover:z-20 smooth-transition cursor-pointer animate-float">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-[9px] bg-sky-500/20 text-sky-300 font-black px-3 py-1 rounded-full uppercase tracking-widest">Global Support</span>
+                        <div class="w-8 h-8 rounded-xl bg-sky-500/15 flex items-center justify-center text-sky-400"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                    </div>
+                    <!-- Custom Team Hands SVG -->
+                    <div class="h-28 bg-gradient-to-br from-sky-500/20 to-indigo-500/20 rounded-2xl flex items-center justify-center overflow-hidden mb-4 border border-white/5">
+                        <svg class="w-16 h-16 text-sky-400" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M30,70 L50,40 L70,70" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+                            <circle cx="50" cy="30" r="8" stroke="currentColor" stroke-width="3" />
+                            <path d="M20,85 C20,70 35,65 50,65 C65,65 80,70 80,85" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <h3 class="font-extrabold text-sm text-slate-100">Direct Volunteerism</h3>
+                    <p class="text-[11px] text-slate-400 mt-1 leading-relaxed">Providing food distribution networks on the ground.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT US SECTION -->
+    <section id="about" class="py-24 lg:py-32 bg-white relative overflow-hidden">
+        <div class="absolute -top-32 -left-32 w-96 h-96 bg-emerald-50 rounded-full filter blur-[120px] opacity-60 pointer-events-none"></div>
+        <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-sky-50 rounded-full filter blur-[120px] opacity-60 pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            
+            <!-- Left Side: Vision & Mission Statement Block -->
+            <div class="lg:col-span-5 space-y-6">
+                <span class="text-xs font-black text-emerald-600 uppercase tracking-widest block">WHO WE ARE</span>
+                <h2 class="text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-tight">
+                    Dedicated to structural transparency, ecological growth, and socio-economic support.
+                </h2>
+                <p class="text-slate-500 font-medium text-sm leading-relaxed">
+                    We operate with the strict belief that positive social metrics are generated through open coordination. Our modules systematically tackle educational, medical, and environmental gaps.
+                </p>
+                
+                <div class="p-8 rounded-3xl bg-slate-900 text-white border border-slate-800 shadow-xl space-y-6 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-sky-500/10 rounded-full filter blur-xl"></div>
+                    <div class="flex items-center gap-4">
+                        <span class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg"><i class="fa-solid fa-bullseye"></i></span>
+                        <div>
+                            <h4 class="text-xs font-black uppercase tracking-widest text-slate-400">The Mission</h4>
+                            <p class="text-sm text-white font-extrabold mt-0.5">Scale direct community micro-alliances.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 border-t border-slate-800 pt-6">
+                        <span class="w-12 h-12 rounded-2xl bg-sky-500/20 text-sky-400 flex items-center justify-center text-lg"><i class="fa-solid fa-eye"></i></span>
+                        <div>
+                            <h4 class="text-xs font-black uppercase tracking-widest text-slate-400">The Vision</h4>
+                            <p class="text-sm text-white font-extrabold mt-0.5">Build a completely verifiable giving ecosystem.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Core Values Bento Grid Layout (Apple-Inspired Bento) -->
+            <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- Bento Cell 1 -->
+                <div class="p-8 rounded-[2rem] bg-slate-50 border border-slate-200/60 bento-hover flex flex-col justify-between h-64">
+                    <div class="flex items-center justify-between">
+                        <span class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl shadow-inner"><i class="fa-solid fa-leaf"></i></span>
+                        <span class="text-[9px] font-black text-emerald-600 bg-emerald-100/50 px-3 py-1 rounded-full uppercase tracking-wider">🌱 Sustainability</span>
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="font-extrabold text-base text-slate-900">Ecological Focus</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">Cultivating local micro-forests with drone telemetry coordinates.</p>
+                    </div>
+                </div>
+
+                <!-- Bento Cell 2 -->
+                <div class="p-8 rounded-[2rem] bg-slate-50 border border-slate-200/60 bento-hover flex flex-col justify-between h-64">
+                    <div class="flex items-center justify-between">
+                        <span class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center text-xl shadow-inner"><i class="fa-solid fa-people-group"></i></span>
+                        <span class="text-[9px] font-black text-sky-600 bg-sky-100/50 px-3 py-1 rounded-full uppercase tracking-wider">🤝 Community Support</span>
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="font-extrabold text-base text-slate-900">Mutual Support</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">Direct nutrition deliveries mapped against verified ground targets.</p>
+                    </div>
+                </div>
+
+                <!-- Bento Cell 3 -->
+                <div class="p-8 rounded-[2rem] bg-slate-50 border border-slate-200/60 bento-hover flex flex-col justify-between h-64">
+                    <div class="flex items-center justify-between">
+                        <span class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl shadow-inner"><i class="fa-solid fa-book-open"></i></span>
+                        <span class="text-[9px] font-black text-emerald-600 bg-emerald-100/50 px-3 py-1 rounded-full uppercase tracking-wider">📚 Education</span>
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="font-extrabold text-base text-slate-900">Academic Access</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">Distributing physical study folders and digital tablet classes.</p>
+                    </div>
+                </div>
+
+                <!-- Bento Cell 4 -->
+                <div class="p-8 rounded-[2rem] bg-slate-50 border border-slate-200/60 bento-hover flex flex-col justify-between h-64">
+                    <div class="flex items-center justify-between">
+                        <span class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center text-xl shadow-inner"><i class="fa-solid fa-hands-holding-child"></i></span>
+                        <span class="text-[9px] font-black text-sky-600 bg-sky-100/50 px-3 py-1 rounded-full uppercase tracking-wider">❤️ Social Impact</span>
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="font-extrabold text-base text-slate-900">Measurable Change</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">Linking corporate sponsors directly to resource centers.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- IMPACT DASHBOARD (ANIMATED STATS) -->
+    <section id="stats" class="py-24 bg-slate-950 text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-tr from-slate-950 via-[#070d1a] to-slate-900 z-0"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+                <span class="text-xs font-black text-sky-400 uppercase tracking-widest block">OUR IMPACT</span>
+                <h2 class="text-3xl lg:text-4xl font-black tracking-tight leading-none">Real-Time Audited Statistics</h2>
+                <p class="text-slate-400 font-medium text-sm leading-relaxed">These numbers are updated dynamically through weekly reports.</p>
+            </div>
+
+            <!-- Bento Statistics Layout -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Stat Card 1 -->
+                <div class="bg-white/5 backdrop-blur-md rounded-[2rem] p-8 border border-white/10 text-center space-y-4 hover:scale-105 smooth-transition shadow-glowGreen">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl border border-emerald-500/10">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div>
+                        <div class="text-4xl sm:text-5xl font-black text-white" id="counter-lives" data-target="50000">0</div>
+                        <p class="text-[10px] sm:text-xs font-black text-emerald-400 tracking-widest uppercase mt-3">Lives Impacted</p>
+                    </div>
+                </div>
+
+                <!-- Stat Card 2 -->
+                <div class="bg-white/5 backdrop-blur-md rounded-[2rem] p-8 border border-white/10 text-center space-y-4 hover:scale-105 smooth-transition shadow-glowBlue">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-sky-500/20 text-sky-400 flex items-center justify-center text-2xl border border-sky-500/10">
+                        <i class="fa-solid fa-tree"></i>
+                    </div>
+                    <div>
+                        <div class="text-4xl sm:text-5xl font-black text-white" id="counter-trees" data-target="20000">0</div>
+                        <p class="text-[10px] sm:text-xs font-black text-sky-400 tracking-widest uppercase mt-3">Trees Planted</p>
+                    </div>
+                </div>
+
+                <!-- Stat Card 3 -->
+                <div class="bg-white/5 backdrop-blur-md rounded-[2rem] p-8 border border-white/10 text-center space-y-4 hover:scale-105 smooth-transition shadow-glowGreen">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl border border-emerald-500/10">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <div class="text-4xl sm:text-5xl font-black text-white" id="counter-students" data-target="10000">0</div>
+                        <p class="text-[10px] sm:text-xs font-black text-emerald-400 tracking-widest uppercase mt-3">Students Supported</p>
+                    </div>
+                </div>
+
+                <!-- Stat Card 4 -->
+                <div class="bg-white/5 backdrop-blur-md rounded-[2rem] p-8 border border-white/10 text-center space-y-4 hover:scale-105 smooth-transition shadow-glowBlue">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-sky-500/20 text-sky-400 flex items-center justify-center text-2xl border border-sky-500/10">
+                        <i class="fa-solid fa-handshake-angle"></i>
+                    </div>
+                    <div>
+                        <div class="text-4xl sm:text-5xl font-black text-white" id="counter-volunteers" data-target="5000">0</div>
+                        <p class="text-[10px] sm:text-xs font-black text-sky-400 tracking-widest uppercase mt-3">Active Volunteers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE MAP SECTION -->
+    <section id="map" class="py-24 bg-slate-50 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <div class="lg:col-span-7 bg-white p-6 rounded-[2.5rem] border border-slate-200/70 shadow-premium relative">
+                <div class="absolute top-6 left-6 bg-slate-900 text-white text-[9px] font-black tracking-widest uppercase px-4 py-2 rounded-full z-10 border border-slate-800 flex items-center gap-1.5 shadow-lg">
+                    <span class="flex h-2 w-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    Interactive India Node Map
+                </div>
+                
+                <div class="w-full h-[500px] flex items-center justify-center bg-slate-950 rounded-3xl relative overflow-hidden">
+                    <svg class="w-full h-full p-4" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <pattern id="mapGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+                            </pattern>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#mapGrid)" rx="24" />
+                        
+                        <!-- Premium abstract representation of India's border -->
+                        <path d="M180,60 L210,120 L280,180 L290,200 L250,220 L240,260 L270,280 L250,320 L230,340 L195,440 L190,450 L180,430 L160,380 L140,320 L130,280 L110,240 L120,200 L115,180 L130,160 L140,110 Z" fill="rgba(16, 185, 129, 0.04)" stroke="rgba(16, 185, 129, 0.2)" stroke-width="2" stroke-linejoin="round" />
+                        
+                        <!-- Map Location Pin: Mumbai -->
+                        <g onclick="selectMapLocation('Mumbai')" class="cursor-pointer group">
+                            <circle cx="145" cy="280" r="16" class="fill-sky-500/10 group-hover:fill-sky-500/30 smooth-transition" />
+                            <circle cx="145" cy="280" r="7" class="fill-sky-400 group-hover:scale-125 smooth-transition" />
+                            <circle cx="145" cy="280" r="2.5" class="fill-white" />
+                        </g>
+
+                        <!-- Map Location Pin: Delhi -->
+                        <g onclick="selectMapLocation('Delhi')" class="cursor-pointer group">
+                            <circle cx="178" cy="155" r="16" class="fill-emerald-500/10 group-hover:fill-emerald-500/30 smooth-transition" />
+                            <circle cx="178" cy="155" r="7" class="fill-emerald-400 group-hover:scale-125 smooth-transition" />
+                            <circle cx="178" cy="155" r="2.5" class="fill-white" />
+                        </g>
+
+                        <!-- Map Location Pin: Bangalore -->
+                        <g onclick="selectMapLocation('Bangalore')" class="cursor-pointer group">
+                            <circle cx="175" cy="360" r="16" class="fill-sky-500/10 group-hover:fill-sky-500/30 smooth-transition" />
+                            <circle cx="175" cy="360" r="7" class="fill-sky-400 group-hover:scale-125 smooth-transition" />
+                            <circle cx="175" cy="360" r="2.5" class="fill-white" />
+                        </g>
+
+                        <!-- Map Location Pin: Chennai -->
+                        <g onclick="selectMapLocation('Chennai')" class="cursor-pointer group">
+                            <circle cx="190" cy="385" r="16" class="fill-emerald-500/10 group-hover:fill-emerald-500/30 smooth-transition" />
+                            <circle cx="190" cy="385" r="7" class="fill-emerald-400 group-hover:scale-125 smooth-transition" />
+                            <circle cx="190" cy="385" r="2.5" class="fill-white" />
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Side Panel showing node statistics -->
+            <div class="lg:col-span-5 space-y-6">
+                <span class="text-xs font-black text-sky-600 uppercase tracking-widest block">OPERATIONAL HUB</span>
+                <h2 class="text-3xl font-black text-slate-900 leading-tight">National Outreach Map</h2>
+                <p class="text-slate-500 font-medium text-sm leading-relaxed">Select any state marker coordinate on the map interface to review active logistics parameters directly from our verified databases.</p>
+                
+                <div id="mapTelemetryPanel" class="bg-gradient-to-br from-slate-900 to-slate-950 text-white rounded-[2rem] p-6 border border-slate-800 shadow-2xl relative overflow-hidden smooth-transition">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-sky-500/10 rounded-full filter blur-xl"></div>
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-4">
+                        <h3 class="text-xl font-bold flex items-center gap-2">
+                            <i class="fa-solid fa-location-dot text-emerald-400"></i> 
+                            <span id="panelCityName">Delhi Operations</span>
+                        </h3>
+                        <span class="text-[9px] font-black bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1 rounded-full uppercase">Active Zone</span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800">
+                                <span class="text-[9px] text-slate-400 uppercase tracking-widest block font-extrabold">Students</span>
+                                <span class="text-2xl font-black text-white mt-1 block" id="valStudents">3,000+</span>
+                            </div>
+                            <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800">
+                                <span class="text-[9px] text-slate-400 uppercase tracking-widest block font-extrabold">Trees Planted</span>
+                                <span class="text-2xl font-black text-white mt-1 block" id="valTrees">5,000+</span>
+                            </div>
+                            <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800">
+                                <span class="text-[9px] text-slate-400 uppercase tracking-widest block font-extrabold">Volunteers</span>
+                                <span class="text-2xl font-black text-white mt-1 block" id="valVols">1,200+</span>
+                            </div>
+                            <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800">
+                                <span class="text-[9px] text-slate-400 uppercase tracking-widest block font-extrabold">Campaigns</span>
+                                <span class="text-2xl font-black text-white mt-1 block" id="valCampaigns">15+</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CAMPAIGNS SECTION -->
+    <section id="campaigns" class="py-24 bg-slate-100 relative">
+        <div class="max-w-7xl mx-auto px-6 space-y-16">
+            <div class="text-center max-w-2xl mx-auto space-y-4">
+                <span class="text-xs font-black text-emerald-600 uppercase tracking-widest block">ACTIVE DRIVES</span>
+                <h2 class="text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">Campaigns & Focal Projects</h2>
+                <p class="text-slate-500 font-medium text-sm leading-relaxed">Direct your support toward dedicated micro-grant activities with verified outcome structures.</p>
+            </div>
+
+            <!-- Bento Campaign Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Campaign Card 1 -->
+                <div class="bg-white rounded-[2.5rem] overflow-hidden border border-slate-200/60 shadow-premium hover:shadow-hoverUp hover:-translate-y-2 smooth-transition flex flex-col justify-between group h-[480px]">
+                    <div>
+                        <div class="h-44 bg-gradient-to-tr from-emerald-400 to-sky-500 flex items-center justify-center text-white text-5xl relative overflow-hidden">
+                            <i class="fa-solid fa-book-open animate-float"></i>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <span class="text-[9px] font-black tracking-widest text-emerald-600 uppercase bg-emerald-50 px-2.5 py-1 rounded-full inline-block">Education</span>
+                            <h3 class="font-extrabold text-lg text-slate-950">Education Support</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">Providing basic homework packs, literacy toolkits, and remote modules.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 space-y-4">
+                        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-emerald-500 to-emerald-600 w-3/4 h-full rounded-full"></div>
+                        </div>
+                        <div class="flex justify-between text-[11px] text-slate-500 font-extrabold">
+                            <span>₹1.5L Raised</span>
+                            <span>350 volunteers</span>
+                        </div>
+                        <button onclick="openCampaignDrawer('education')" class="w-full py-3 bg-slate-50 hover:bg-emerald-500 hover:text-white text-slate-800 text-xs font-black rounded-xl smooth-transition border border-slate-200 uppercase tracking-wider">Learn More <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                    </div>
+                </div>
+
+                <!-- Campaign Card 2 -->
+                <div class="bg-white rounded-[2.5rem] overflow-hidden border border-slate-200/60 shadow-premium hover:shadow-hoverUp hover:-translate-y-2 smooth-transition flex flex-col justify-between group h-[480px]">
+                    <div>
+                        <div class="h-44 bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-white text-5xl relative overflow-hidden">
+                            <i class="fa-solid fa-leaf animate-float"></i>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <span class="text-[9px] font-black tracking-widest text-emerald-600 uppercase bg-emerald-50 px-2.5 py-1 rounded-full inline-block">Environment</span>
+                            <h3 class="font-extrabold text-lg text-slate-950">Green Earth</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">Tree plantation runs mapped alongside digital coordinates.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 space-y-4">
+                        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-emerald-500 to-teal-500 w-1/2 h-full rounded-full"></div>
+                        </div>
+                        <div class="flex justify-between text-[11px] text-slate-500 font-extrabold">
+                            <span>₹1.0L Raised</span>
+                            <span>210 volunteers</span>
+                        </div>
+                        <button onclick="openCampaignDrawer('environment')" class="w-full py-3 bg-slate-50 hover:bg-emerald-500 hover:text-white text-slate-800 text-xs font-black rounded-xl smooth-transition border border-slate-200 uppercase tracking-wider">Learn More <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                    </div>
+                </div>
+
+                <!-- Campaign Card 3 -->
+                <div class="bg-white rounded-[2.5rem] overflow-hidden border border-slate-200/60 shadow-premium hover:shadow-hoverUp hover:-translate-y-2 smooth-transition flex flex-col justify-between group h-[480px]">
+                    <div>
+                        <div class="h-44 bg-gradient-to-tr from-amber-400 to-orange-500 flex items-center justify-center text-white text-5xl relative overflow-hidden">
+                            <i class="fa-solid fa-bowl-food animate-float"></i>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <span class="text-[9px] font-black tracking-widest text-orange-600 uppercase bg-orange-50 px-2.5 py-1 rounded-full inline-block">Nutrition</span>
+                            <h3 class="font-extrabold text-lg text-slate-950">Hunger Relief</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">Serving nutritional cooked lunches directly to child care camps.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 space-y-4">
+                        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-orange-400 to-amber-500 w-[90%] h-full rounded-full"></div>
+                        </div>
+                        <div class="flex justify-between text-[11px] text-slate-500 font-extrabold">
+                            <span>₹1.8L Raised</span>
+                            <span>450 volunteers</span>
+                        </div>
+                        <button onclick="openCampaignDrawer('hunger')" class="w-full py-3 bg-slate-50 hover:bg-emerald-500 hover:text-white text-slate-800 text-xs font-black rounded-xl smooth-transition border border-slate-200 uppercase tracking-wider">Learn More <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                    </div>
+                </div>
+
+                <!-- Campaign Card 4 -->
+                <div class="bg-white rounded-[2.5rem] overflow-hidden border border-slate-200/60 shadow-premium hover:shadow-hoverUp hover:-translate-y-2 smooth-transition flex flex-col justify-between group h-[480px]">
+                    <div>
+                        <div class="h-44 bg-gradient-to-tr from-pink-500 to-rose-500 flex items-center justify-center text-white text-5xl relative overflow-hidden">
+                            <i class="fa-solid fa-venus animate-float"></i>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <span class="text-[9px] font-black tracking-widest text-pink-600 uppercase bg-pink-50 px-2.5 py-1 rounded-full inline-block">Upliftment</span>
+                            <h3 class="font-extrabold text-lg text-slate-950">Women Support</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">Sponsoring vocational sewing kits and digital learning nodes.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 space-y-4">
+                        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-pink-500 to-rose-500 w-[40%] h-full rounded-full"></div>
+                        </div>
+                        <div class="flex justify-between text-[11px] text-slate-500 font-extrabold">
+                            <span>₹80K Raised</span>
+                            <span>180 volunteers</span>
+                        </div>
+                        <button onclick="openCampaignDrawer('women')" class="w-full py-3 bg-slate-50 hover:bg-emerald-500 hover:text-white text-slate-800 text-xs font-black rounded-xl smooth-transition border border-slate-200 uppercase tracking-wider">Learn More <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STRIPE-STYLE SLIDING PANEL (CAMPAIGN DRAWERS) -->
+        <div id="campaignDrawer" class="fixed top-0 right-0 h-full w-full max-w-lg bg-white shadow-premium z-50 transform translate-x-full transition-transform duration-500 border-l border-slate-200 overflow-y-auto">
+            <div class="sticky top-0 bg-white/95 border-b border-slate-200/60 p-6 flex justify-between items-center z-10">
+                <h4 class="text-lg font-extrabold text-slate-900" id="drawerTitle">Project Parameters</h4>
+                <button onclick="closeCampaignDrawer()" class="w-10 h-10 rounded-full bg-slate-50 hover:bg-slate-100 flex items-center justify-center smooth-transition">
+                    <i class="fa-solid fa-xmark text-slate-500"></i>
+                </button>
+            </div>
+            <div class="p-8 space-y-8">
+                <div class="h-48 rounded-[2rem] bg-gradient-to-br from-emerald-500 to-sky-500 flex items-center justify-center text-white text-6xl shadow-inner relative overflow-hidden" id="drawerGradient">
+                    <i id="drawerIcon" class="fa-solid fa-book-open animate-float"></i>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-xl font-black text-slate-900">Project Strategy & Scope</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed font-medium" id="drawerDesc">Scope details loading...</p>
+                </div>
+                
+                <div class="p-6 bg-slate-50 rounded-3xl border border-slate-200/60 space-y-4">
+                    <h4 class="text-xs font-black text-slate-400 uppercase tracking-widest">Active Verification Checklist</h4>
+                    <ul class="space-y-2 text-xs text-slate-600 font-extrabold">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500"></i> 100% On-Ground Allocation Tracking</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500"></i> Localized Audits Uploaded Monthly</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500"></i> Geographic Node Verification Verified</li>
+                    </ul>
+                </div>
+                
+                <a href="#calculator" onclick="closeCampaignDrawer()" class="block w-full py-4 bg-emerald-500 text-center text-slate-950 font-black text-xs rounded-2xl shadow-glowGreen uppercase tracking-wider">Support This Drive</a>
+            </div>
+        </div>
+        <div id="drawerBackdrop" onclick="closeCampaignDrawer()" class="hidden fixed inset-0 bg-slate-950/25 backdrop-blur-sm z-40 transition-all"></div>
+    </section>
+
+    <!-- INTERACTIVE DONATION CALCULATOR WITH GEMINI AI IMPACT PLANNER -->
+    <section id="calculator" class="py-24 bg-white relative overflow-hidden">
+        <div class="max-w-5xl mx-auto px-6 space-y-12">
+            <div class="text-center space-y-4">
+                <span class="text-xs font-black text-emerald-600 uppercase tracking-widest block">INTERACTIVE CALCULATOR</span>
+                <h2 class="text-3xl lg:text-4xl font-black text-slate-950">Scale Your Giving Impact</h2>
+                <p class="text-slate-500 font-medium text-sm max-w-lg mx-auto">Verify exactly what your micro-donation secures inside InAmigos programs manually or with dynamic AI forecasting.</p>
+            </div>
+
+            <!-- Bento Card Layout for Donation Section -->
+            <div class="bg-slate-50 rounded-[2.5rem] p-8 lg:p-12 border border-slate-200/60 shadow-premium grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
+                <div class="md:col-span-7 flex flex-col justify-between space-y-6">
+                    <div class="space-y-3">
+                        <label class="block text-xs font-black uppercase tracking-widest text-slate-400">Choose Preset Amount</label>
+                        <div class="grid grid-cols-4 gap-2">
+                            <button onclick="setDonationVal(100)" class="btn-tier-select py-3 text-xs font-black rounded-2xl bg-white border border-slate-200 hover:border-emerald-500 text-slate-800 smooth-transition shadow-sm focus:ring-4 focus:ring-emerald-500/10" id="tierBtn-100">₹100</button>
+                            <button onclick="setDonationVal(500)" class="btn-tier-select py-3 text-xs font-black rounded-2xl bg-white border border-slate-200 hover:border-emerald-500 text-slate-800 smooth-transition shadow-sm focus:ring-4 focus:ring-emerald-500/10" id="tierBtn-500">₹500</button>
+                            <button onclick="setDonationVal(1000)" class="btn-tier-select py-3 text-xs font-black rounded-2xl bg-white border border-slate-200 hover:border-emerald-500 text-slate-800 smooth-transition shadow-sm focus:ring-4 focus:ring-emerald-500/10" id="tierBtn-1000">₹1000</button>
+                            <button onclick="setDonationVal(5000)" class="btn-tier-select py-3 text-xs font-black rounded-2xl bg-white border border-slate-200 hover:border-emerald-500 text-slate-800 smooth-transition shadow-sm focus:ring-4 focus:ring-emerald-500/10" id="tierBtn-5000">₹5000</button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <label class="block text-xs font-black uppercase tracking-widest text-slate-400">Fine-Tune Contribution</label>
+                        <input type="range" id="donationRange" min="100" max="10000" step="100" value="1000" oninput="updateCalculatorFromRange()" class="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+                        <div class="flex justify-between text-[11px] text-slate-400 font-black font-mono">
+                            <span>₹100</span>
+                            <span>₹5,000</span>
+                            <span>₹10,000+</span>
+                        </div>
+                    </div>
+
+                    <!-- Gemini AI Plan Display -->
+                    <div id="aiImpactPlanBox" class="hidden p-6 bg-slate-900 text-white rounded-3xl border border-slate-800 space-y-3 text-xs leading-relaxed transition-all duration-500 relative">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                            <span class="font-black text-sky-400 uppercase tracking-widest text-[9px] flex items-center gap-1.5">
+                                <i class="fa-solid fa-brain"></i> Gemini Live AI Plan
+                            </span>
+                            <button onclick="closeAiPlanBox()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+                        </div>
+                        <div id="aiPlanText" class="text-slate-300 overflow-y-auto max-h-48 whitespace-pre-line font-medium pr-1">Generating your dynamic impact report...</div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-5 bg-gradient-to-br from-slate-900 to-slate-950 p-8 rounded-[2.5rem] text-white flex flex-col justify-between shadow-glowGreen relative overflow-hidden border border-slate-800 min-h-[360px]">
+                    <div class="absolute -top-12 -right-12 w-28 h-28 bg-emerald-500/10 rounded-full filter blur-xl"></div>
+                    <div>
+                        <span class="text-[9px] font-black text-emerald-400 tracking-widest uppercase block">GIVING METRIC OUTCOME</span>
+                        <div class="text-4xl font-black text-white mt-1.5 font-mono">₹<span id="calcDisplayAmount">1,000</span></div>
+                    </div>
+
+                    <div class="p-5 bg-slate-950/70 rounded-2xl border border-slate-800/80 flex items-start gap-4 my-4">
+                        <span class="text-2xl text-emerald-400 shrink-0" id="calcImpactIcon"><i class="fa-solid fa-gift"></i></span>
+                        <div>
+                            <h4 class="font-black text-[10px] uppercase tracking-wider text-slate-400">Real-World Outcome</h4>
+                            <p class="text-xs text-slate-200 font-medium mt-1 leading-relaxed" id="calcImpactStatement">Provides school bags and stationery items for rural students.</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <button onclick="submitCalculatorDonation()" class="w-full py-4 bg-gradient-to-r from-emerald-400 to-emerald-500 hover:from-emerald-500 hover:to-emerald-600 text-slate-950 font-black rounded-2xl text-xs tracking-wider uppercase smooth-transition shadow-lg flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-shield-heart text-slate-950"></i> Commit Secure Donation
+                        </button>
+                        <button onclick="generateAiImpactPlan()" class="w-full py-3.5 bg-sky-600/25 hover:bg-sky-600/40 text-sky-300 font-extrabold rounded-2xl text-xs tracking-wider uppercase smooth-transition border border-sky-500/30 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> ✨ Generate AI Impact Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VISUAL DONATION JOURNEY -->
+    <section id="journey" class="py-24 bg-slate-50 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 space-y-16">
+            <div class="text-center max-w-2xl mx-auto space-y-4">
+                <span class="text-xs font-black text-sky-600 uppercase tracking-widest block">HOW IT WORKS</span>
+                <h2 class="text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">The Lifecycle of Your Giving</h2>
+                <p class="text-slate-500 font-medium text-sm leading-relaxed">Follow your donation directly from checkout authorization to verified ground results.</p>
+            </div>
+
+            <!-- Horizontal Step Sequence with Custom SVG Connector -->
+            <div class="relative grid grid-cols-1 md:grid-cols-5 gap-6 z-10">
+                <div class="absolute inset-0 pointer-events-none hidden md:block" style="z-index: -1;">
+                    <svg class="w-full h-full" viewBox="0 0 1000 200" fill="none">
+                        <path d="M 120 100 Q 200 60, 280 100 T 480 100 T 680 100 T 880 100" stroke="url(#glowingGradient)" stroke-width="3" stroke-linecap="round" fill="none" class="journey-connector" />
+                        <defs>
+                            <linearGradient id="glowingGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#10b981" />
+                                <stop offset="50%" stop-color="#0ea5e9" />
+                                <stop offset="100%" stop-color="#10b981" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+
+                <!-- Step 1 -->
+                <div class="bg-white border border-slate-200/60 rounded-[2rem] p-6 text-center space-y-4 hover:border-emerald-500 smooth-transition shadow-sm bento-hover">
+                    <div class="w-12 h-12 bg-gradient-to-tr from-emerald-400 to-teal-500 text-white rounded-2xl flex items-center justify-center text-lg mx-auto shadow-md">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                    <div>
+                        <span class="text-[9px] uppercase font-black tracking-widest text-emerald-500 block">Step 01</span>
+                        <h4 class="font-extrabold text-slate-900 text-sm mt-1">Sponsorship</h4>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-white border border-slate-200/60 rounded-[2rem] p-6 text-center space-y-4 hover:border-sky-500 smooth-transition shadow-sm bento-hover">
+                    <div class="w-12 h-12 bg-gradient-to-tr from-sky-400 to-indigo-500 text-white rounded-2xl flex items-center justify-center text-lg mx-auto shadow-md">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div>
+                        <span class="text-[9px] uppercase font-black tracking-widest text-sky-500 block">Step 02</span>
+                        <h4 class="font-extrabold text-slate-900 text-sm mt-1">Verification</h4>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-white border border-slate-200/60 rounded-[2rem] p-6 text-center space-y-4 hover:border-emerald-500 smooth-transition shadow-sm bento-hover">
+                    <div class="w-12 h-12 bg-gradient-to-tr from-emerald-400 to-teal-500 text-white rounded-2xl flex items-center justify-center text-lg mx-auto shadow-md">
+                        <i class="fa-solid fa-boxes-packing"></i>
+                    </div>
+                    <div>
+                        <span class="text-[9px] uppercase font-black tracking-widest text-emerald-500 block">Step 03</span>
+                        <h4 class="font-extrabold text-slate-900 text-sm mt-1">Deployment</h4>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="bg-white border border-slate-200/60 rounded-[2rem] p-6 text-center space-y-4 hover:border-sky-500 smooth-transition shadow-sm bento-hover">
+                    <div class="w-12 h-12 bg-gradient-to-tr from-sky-400 to-indigo-500 text-white rounded-2xl flex items-center justify-center text-lg mx-auto shadow-md">
+                        <i class="fa-solid fa-people-carry-box"></i>
+                    </div>
+                    <div>
+                        <span class="text-[9px] uppercase font-black tracking-widest text-sky-500 block">Step 04</span>
+                        <h4 class="font-extrabold text-slate-900 text-sm mt-1">Implementation</h4>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="bg-white border border-slate-200/60 rounded-[2rem] p-6 text-center space-y-4 hover:border-emerald-500 smooth-transition shadow-sm bento-hover">
+                    <div class="w-12 h-12 bg-gradient-to-tr from-emerald-400 to-teal-500 text-white rounded-2xl flex items-center justify-center text-lg mx-auto shadow-md">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <span class="text-[9px] uppercase font-black tracking-widest text-emerald-500 block">Step 05</span>
+                        <h4 class="font-extrabold text-slate-900 text-sm mt-1">Open Reports</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUCCESS STORIES SECTION -->
+    <section id="stories" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-6 space-y-16">
+            <div class="text-center max-w-2xl mx-auto space-y-4">
+                <span class="text-xs font-black text-emerald-600 uppercase tracking-widest block">SUCCESS CASES</span>
+                <h2 class="text-3xl lg:text-4xl font-black text-slate-900">Transformation Chronicles</h2>
+                <p class="text-slate-500 font-medium text-sm leading-relaxed">Proof of sustainable ground metrics displayed with interactive comparative narratives.</p>
+            </div>
+
+            <!-- Bento comparative panels -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Case Study 1 -->
+                <div class="bg-slate-50 rounded-[2.5rem] p-8 border border-slate-200/60 shadow-premium flex flex-col justify-between space-y-6">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[9px] bg-emerald-100 text-emerald-800 font-black px-3 py-1 rounded-full uppercase tracking-wider">Education</span>
+                            <span class="text-[10px] font-mono font-bold text-slate-400">Project ID: ED-205</span>
+                        </div>
+                        <h3 class="font-black text-xl text-slate-900">Providing Learning Kits to Rural Students</h3>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="p-5 bg-red-50/50 border border-red-100 rounded-2xl">
+                                <span class="text-[9px] font-black text-red-700 tracking-wider uppercase block">BEFORE STATE</span>
+                                <h4 class="font-bold text-sm text-slate-800 mt-1">Limited Resources</h4>
+                                <p class="text-xs text-slate-500 mt-1 leading-relaxed font-medium">Children did not have textbooks or standard notebooks to practice assignments.</p>
+                            </div>
+                            <div class="p-5 bg-emerald-50/50 border border-emerald-100 rounded-2xl">
+                                <span class="text-[9px] font-black text-emerald-700 tracking-wider uppercase block">AFTER STATE</span>
+                                <h4 class="font-bold text-sm text-slate-800 mt-1">Completed Materials</h4>
+                                <p class="text-xs text-slate-500 mt-1 leading-relaxed font-medium">Regularly attending classes equipped with school bags and study notes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case Study 2 -->
+                <div class="bg-slate-50 rounded-[2.5rem] p-8 border border-slate-200/60 shadow-premium flex flex-col justify-between space-y-6">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[9px] bg-sky-100 text-sky-800 font-black px-3 py-1 rounded-full uppercase tracking-wider">Social Impact</span>
+                            <span class="text-[10px] font-mono font-bold text-slate-400">Project ID: SI-902</span>
+                        </div>
+                        <h3 class="font-black text-xl text-slate-900">Cooperative Craft Business Modules</h3>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="p-5 bg-red-50/50 border border-red-100 rounded-2xl">
+                                <span class="text-[9px] font-black text-red-700 tracking-wider uppercase block">BEFORE STATE</span>
+                                <h4 class="font-bold text-sm text-slate-800 mt-1">No Steady Job</h4>
+                                <p class="text-xs text-slate-500 mt-1 leading-relaxed font-medium">Sustaining on erratic wages with high economic vulnerabilities.</p>
+                            </div>
+                            <div class="p-5 bg-emerald-50/50 border border-emerald-100 rounded-2xl">
+                                <span class="text-[9px] font-black text-emerald-700 tracking-wider uppercase block">AFTER STATE</span>
+                                <h4 class="font-bold text-sm text-slate-800 mt-1">Self Employed</h4>
+                                <p class="text-xs text-slate-500 mt-1 leading-relaxed font-medium">Co-managing production cells and selling to micro-hubs directly.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section id="gallery" class="py-24 bg-slate-100 relative">
+        <div class="max-w-7xl mx-auto px-6 space-y-12">
+            <div class="text-center max-w-2xl mx-auto space-y-4">
+                <span class="text-xs font-black text-emerald-600 uppercase tracking-widest block">ON-GROUND EVIDENCE</span>
+                <h2 class="text-3xl lg:text-4xl font-black text-slate-900">Media Gallery</h2>
+                <p class="text-slate-500 font-medium text-sm leading-relaxed">Visual logs of verified distributions and community actions.</p>
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div class="flex flex-wrap justify-center gap-2">
+                <button onclick="filterGallery('all')" id="tab-all" class="tab-btn px-5 py-2.5 text-xs font-black rounded-full bg-slate-900 text-white smooth-transition border border-slate-800 uppercase tracking-wider">All Programs</button>
+                <button onclick="filterGallery('education')" id="tab-education" class="tab-btn px-5 py-2.5 text-xs font-black rounded-full bg-white text-slate-600 hover:bg-slate-50 smooth-transition border border-slate-200 uppercase tracking-wider">Education</button>
+                <button onclick="filterGallery('plantation')" id="tab-plantation" class="tab-btn px-5 py-2.5 text-xs font-black rounded-full bg-white text-slate-600 hover:bg-slate-50 smooth-transition border border-slate-200 uppercase tracking-wider">Forestry</button>
+                <button onclick="filterGallery('food')" id="tab-food" class="tab-btn px-5 py-2.5 text-xs font-black rounded-full bg-white text-slate-600 hover:bg-slate-50 smooth-transition border border-slate-200 uppercase tracking-wider">Food Distribution</button>
+                <button onclick="filterGallery('medical')" id="tab-medical" class="tab-btn px-5 py-2.5 text-xs font-black rounded-full bg-white text-slate-600 hover:bg-slate-50 smooth-transition border border-slate-200 uppercase tracking-wider">Medical Camps</button>
+            </div>
+
+            <!-- Masonry-Style Gallery Grid -->
+            <div id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-300">
+                <!-- Education -->
+                <div class="gallery-item bg-white p-4 rounded-[2rem] border border-slate-200/60 shadow-sm smooth-transition hover:scale-[1.02] group overflow-hidden" data-category="education">
+                    <div class="h-44 rounded-2xl bg-gradient-to-tr from-emerald-500 to-sky-500 flex items-center justify-center text-white relative overflow-hidden border border-slate-100">
+                        <i class="fa-solid fa-graduation-cap text-5xl opacity-35 group-hover:scale-110 smooth-transition"></i>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-[9px] font-black text-sky-600 uppercase tracking-widest block">Education Support</span>
+                        <h4 class="font-extrabold text-slate-900 mt-1">Classroom Literacy Drive</h4>
+                    </div>
+                </div>
+
+                <!-- Plantation -->
+                <div class="gallery-item bg-white p-4 rounded-[2rem] border border-slate-200/60 shadow-sm smooth-transition hover:scale-[1.02] group overflow-hidden" data-category="plantation">
+                    <div class="h-44 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white relative overflow-hidden border border-slate-100">
+                        <i class="fa-solid fa-tree text-5xl opacity-35 group-hover:scale-110 smooth-transition"></i>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-[9px] font-black text-emerald-600 uppercase tracking-widest block">Forestry Action</span>
+                        <h4 class="font-extrabold text-slate-900 mt-1">Local Reforestation Node</h4>
+                    </div>
+                </div>
+
+                <!-- Food -->
+                <div class="gallery-item bg-white p-4 rounded-[2rem] border border-slate-200/60 shadow-sm smooth-transition hover:scale-[1.02] group overflow-hidden" data-category="food">
+                    <div class="h-44 rounded-2xl bg-gradient-to-tr from-orange-400 to-amber-500 flex items-center justify-center text-white relative overflow-hidden border border-slate-100">
+                        <i class="fa-solid fa-bowl-food text-5xl opacity-35 group-hover:scale-110 smooth-transition"></i>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-[9px] font-black text-orange-600 uppercase tracking-widest block">Nutrition Grid</span>
+                        <h4 class="font-extrabold text-slate-900 mt-1">Sustenance Delivery Hub</h4>
+                    </div>
+                </div>
+
+                <!-- Medical -->
+                <div class="gallery-item bg-white p-4 rounded-[2rem] border border-slate-200/60 shadow-sm smooth-transition hover:scale-[1.02] group overflow-hidden" data-category="medical">
+                    <div class="h-44 rounded-2xl bg-gradient-to-tr from-red-400 to-pink-500 flex items-center justify-center text-white relative overflow-hidden border border-slate-100">
+                        <i class="fa-solid fa-house-chimney-medical text-5xl opacity-35 group-hover:scale-110 smooth-transition"></i>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-[9px] font-black text-red-500 uppercase tracking-widest block">Healthcare Outreach</span>
+                        <h4 class="font-extrabold text-slate-900 mt-1">Regional Checkup Clinic</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRANSPARENCY CENTER SECTION -->
+    <section id="transparency" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-6 space-y-16">
+            <div class="text-center max-w-2xl mx-auto space-y-4">
+                <span class="text-xs font-black text-emerald-600 uppercase tracking-widest block">REGULATORY TRUST</span>
+                <h2 class="text-3xl lg:text-4xl font-black text-slate-900">Transparency Center</h2>
+                <p class="text-slate-500 font-medium text-sm leading-relaxed">Direct public access to organizational accounting logs and ground telemetry checklists.</p>
+            </div>
+
+            <!-- Bento grid for audit files -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Document Card 1 -->
+                <button onclick="openTransparencyDetail('annual')" class="p-6 bg-slate-50 rounded-[2rem] border border-slate-200 hover:border-emerald-500 text-left hover:-translate-y-1.5 smooth-transition group shadow-sm flex flex-col justify-between h-48">
+                    <div class="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center text-base"><i class="fa-solid fa-file-contract"></i></div>
+                    <div>
+                        <h4 class="font-black text-sm text-slate-900 uppercase">Annual Report</h4>
+                        <p class="text-xs text-slate-500 mt-1 leading-relaxed">Scope summaries of actions and metric parameters.</p>
+                    </div>
+                </button>
+
+                <!-- Document Card 2 -->
+                <button onclick="openTransparencyDetail('financial')" class="p-6 bg-slate-50 rounded-[2rem] border border-slate-200 hover:border-emerald-500 text-left hover:-translate-y-1.5 smooth-transition group shadow-sm flex flex-col justify-between h-48">
+                    <div class="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center text-base"><i class="fa-solid fa-money-bill-transfer"></i></div>
+                    <div>
+                        <h4 class="font-black text-sm text-slate-900 uppercase">Financial Audit</h4>
+                        <p class="text-xs text-slate-500 mt-1 leading-relaxed">Fund mapping checked down to micro-grant transactions.</p>
+                    </div>
+                </button>
+
+                <!-- Document Card 3 -->
+                <button onclick="openTransparencyDetail('impact')" class="p-6 bg-slate-50 rounded-[2rem] border border-slate-200 hover:border-emerald-500 text-left hover:-translate-y-1.5 smooth-transition group shadow-sm flex flex-col justify-between h-48">
+                    <div class="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center text-base"><i class="fa-solid fa-square-poll-vertical"></i></div>
+                    <div>
+                        <h4 class="font-black text-sm text-slate-900 uppercase">Impact Report</h4>
+                        <p class="text-xs text-slate-500 mt-1 leading-relaxed">Audited survival rates of tree plantations.</p>
+                    </div>
+                </button>
+
+                <!-- Document Card 4 -->
+                <button onclick="openTransparencyDetail('csr')" class="p-6 bg-slate-50 rounded-[2rem] border border-slate-200 hover:border-emerald-500 text-left hover:-translate-y-1.5 smooth-transition group shadow-sm flex flex-col justify-between h-48">
+                    <div class="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center text-base"><i class="fa-solid fa-building-circle-check"></i></div>
+                    <div>
+                        <h4 class="font-black text-sm text-slate-900 uppercase">CSR Partners</h4>
+                        <p class="text-xs text-slate-500 mt-1 leading-relaxed">Alliances validating our delivery parameters.</p>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- TRANSPARENCY DETAILED DRAWERS -->
+        <div id="transparencyDrawer" class="fixed top-0 right-0 h-full w-full max-w-lg bg-white shadow-premium z-50 transform translate-x-full transition-transform duration-500 border-l border-slate-200 overflow-y-auto">
+            <div class="sticky top-0 bg-white/95 border-b border-slate-200/60 p-6 flex justify-between items-center z-10">
+                <h4 class="text-lg font-extrabold text-slate-900" id="transparencyTitle">Ledger Document</h4>
+                <button onclick="closeTransparencyDrawer()" class="w-10 h-10 rounded-full bg-slate-50 hover:bg-slate-100 flex items-center justify-center smooth-transition">
+                    <i class="fa-solid fa-xmark text-slate-500"></i>
+                </button>
+            </div>
+            <div class="p-8 space-y-6">
+                <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200/60 text-slate-600 text-xs leading-relaxed font-medium" id="transparencyDocBody">
+                    Document details loading...
+                </div>
+            </div>
+        </div>
+        <div id="transparencyDrawerBackdrop" onclick="closeTransparencyDrawer()" class="hidden fixed inset-0 bg-slate-950/25 backdrop-blur-sm z-40 transition-all"></div>
+    </section>
+
+    <!-- TRUST BLUEPRINT (WHY US?) -->
+    <section id="why-us" class="py-24 bg-slate-900 text-white relative">
+        <div class="max-w-7xl mx-auto px-6 space-y-16">
+            <div class="text-center max-w-2xl mx-auto space-y-4">
+                <span class="text-xs font-black text-emerald-400 uppercase tracking-widest block">TRUST BLUEPRINT</span>
+                <h2 class="text-3xl lg:text-4xl font-black">Why Donate To Us</h2>
+                <p class="text-slate-400 font-medium text-sm leading-relaxed">Six foundational pillars that secure structural, direct, and transparent change.</p>
+            </div>
+
+            <!-- Bento Grid layout for infographic features -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Bento Block 1 -->
+                <div class="bg-white/5 backdrop-blur border border-white/10 p-8 rounded-[2.5rem] space-y-3 shadow-glassGlow bento-hover flex flex-col justify-between h-64">
+                    <span class="text-emerald-400 text-3xl"><i class="fa-solid fa-fingerprint"></i></span>
+                    <div class="space-y-1.5">
+                        <h4 class="font-extrabold text-lg text-white">100% Transparent</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed font-medium">Direct tracing matches verified ground allocation reports against invoice records.</p>
+                    </div>
+                </div>
+
+                <!-- Bento Block 2 -->
+                <div class="bg-white/5 backdrop-blur border border-white/10 p-8 rounded-[2.5rem] space-y-3 shadow-glassGlow bento-hover flex flex-col justify-between h-64">
+                    <span class="text-sky-400 text-3xl"><i class="fa-solid fa-shield-circle-check"></i></span>
+                    <div class="space-y-1.5">
+                        <h4 class="font-extrabold text-lg text-white">Verified Projects</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed font-medium">Coordinate logs track native tree growth and learning support packages.</p>
+                    </div>
+                </div>
+
+                <!-- Bento Block 3 -->
+                <div class="bg-white/5 backdrop-blur border border-white/10 p-8 rounded-[2.5rem] space-y-3 shadow-glassGlow bento-hover flex flex-col justify-between h-64">
+                    <span class="text-emerald-400 text-3xl"><i class="fa-solid fa-chart-line"></i></span>
+                    <div class="space-y-1.5">
+                        <h4 class="font-extrabold text-lg text-white">Real Impact Tracking</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed font-medium">Outcome metrics published continuously on operational maps.</p>
+                    </div>
+                </div>
+
+                <!-- Bento Block 4 -->
+                <div class="bg-white/5 backdrop-blur border border-white/10 p-8 rounded-[2.5rem] space-y-3 shadow-glassGlow bento-hover flex flex-col justify-between h-64">
+                    <span class="text-sky-400 text-3xl"><i class="fa-solid fa-people-roof"></i></span>
+                    <div class="space-y-1.5">
+                        <h4 class="font-extrabold text-lg text-white">Community Driven</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed font-medium">Direct tactical actions run hand-in-hand with verified local coordinators.</p>
+                    </div>
+                </div>
+
+                <!-- Bento Block 5 -->
+                <div class="bg-white/5 backdrop-blur border border-white/10 p-8 rounded-[2.5rem] space-y-3 shadow-glassGlow bento-hover flex flex-col justify-between h-64">
+                    <span class="text-emerald-400 text-3xl"><i class="fa-solid fa-medal"></i></span>
+                    <div class="space-y-1.5">
+                        <h4 class="font-extrabold text-lg text-white">Trusted Volunteers</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed font-medium">On-boarded interns undergo systematic service checklist clearances.</p>
+                    </div>
+                </div>
+
+                <!-- Bento Block 6 -->
+                <div class="bg-white/5 backdrop-blur border border-white/10 p-8 rounded-[2.5rem] space-y-3 shadow-glassGlow bento-hover flex flex-col justify-between h-64">
+                    <span class="text-sky-400 text-3xl"><i class="fa-solid fa-check-double"></i></span>
+                    <div class="space-y-1.5">
+                        <h4 class="font-extrabold text-lg text-white">Measurable Results</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed font-medium">Direct conversion numbers registered and archived quarterly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VOLUNTEER REGISTRATION SECTION WITH GEMINI AI ACTION ROADMAP -->
+    <section id="volunteer" class="py-24 bg-slate-50 relative">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            
+            <div class="lg:col-span-6 space-y-8">
+                <span class="text-xs font-black text-sky-600 uppercase tracking-widest block">JOIN THE CREW</span>
+                <h2 class="text-3xl lg:text-4xl font-black text-slate-900 leading-tight">Become an On-Ground Agent of Change</h2>
+                <p class="text-slate-600 font-medium leading-relaxed text-sm">
+                    Build grassroots leadership experience. Coordinate resource distribution networks in your college area, or lead ecological plantation drives backed with verified service credentials.
+                </p>
+                
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center shrink-0 shadow-sm"><i class="fa-solid fa-award"></i></div>
+                        <div>
+                            <h4 class="font-extrabold text-slate-900 text-sm">Verified Credentials</h4>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed font-medium">Performance credentials and leadership hours logged on your profile.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 shadow-sm"><i class="fa-solid fa-user-group"></i></div>
+                        <div>
+                            <h4 class="font-extrabold text-slate-900 text-sm">Leadership Tracks</h4>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed font-medium">Direct zone management opportunities for local distribution hubs.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live AI Volunteer Roadmap Area -->
+                <div id="aiVolunteerPlanBox" class="hidden p-6 bg-slate-900 text-white rounded-[2rem] border border-slate-800 shadow-xl space-y-3 text-xs leading-relaxed transition-all duration-500 relative">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                        <span class="font-black text-emerald-400 uppercase tracking-widest text-[9px] flex items-center gap-1.5">
+                            <i class="fa-solid fa-brain animate-pulse"></i> Gemini AI Onboarding Plan
+                        </span>
+                        <button onclick="closeAiVolunteerBox()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <div id="aiVolunteerPlanText" class="text-slate-300 overflow-y-auto max-h-48 whitespace-pre-line font-medium pr-1">Analyzing your skill profiles and mapping custom milestones...</div>
+                </div>
+            </div>
+
+            <!-- Bento Form Card -->
+            <div class="lg:col-span-6 bg-white rounded-[2.5rem] border border-slate-200/60 shadow-premium p-8 lg:p-12 relative overflow-hidden">
+                <h3 class="font-black text-2xl text-slate-950 mb-6">Register as a Volunteer</h3>
+                <form class="space-y-5" onsubmit="triggerVolunteerRegistrationSubmit(event)">
+                    <div>
+                        <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">First & Last Name</label>
+                        <input type="text" required id="volName" class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-4 focus:ring-sky-500/10 focus:border-sky-500 text-slate-800 smooth-transition">
+                    </div>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Email Address</label>
+                            <input type="email" required id="volEmail" class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-4 focus:ring-sky-500/10 focus:border-sky-500 text-slate-800 smooth-transition">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Phone Number</label>
+                            <input type="tel" required id="volPhone" class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-4 focus:ring-sky-500/10 focus:border-sky-500 text-slate-800 smooth-transition">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Primary Location</label>
+                            <input type="text" required id="volLoc" class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-4 focus:ring-sky-500/10 focus:border-sky-500 text-slate-800 smooth-transition" placeholder="City, State">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Weekly Availability</label>
+                            <select id="volAvailability" class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:outline-none focus:ring-4 focus:ring-sky-500/10 focus:border-sky-500 text-slate-600 smooth-transition">
+                                <option value="Part-Time (2-5 hrs)">Part-Time (2-5 hrs)</option>
+                                <option value="Mid-Level (5-10 hrs)">Mid-Level (5-10 hrs)</option>
+                                <option value="Weekend Intensive">Weekend Intensive</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Primary Interest Area</label>
+                        <select id="volSkill" class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:outline-none focus:ring-4 focus:ring-sky-500/10 focus:border-sky-500 text-slate-600 smooth-transition">
+                            <option value="Outreach & Media">Outreach & Media</option>
+                            <option value="On-Ground Distribution">On-Ground Distribution</option>
+                            <option value="Fundraising Logistics">Fundraising Logistics</option>
+                            <option value="Forestry Drive Management">Forestry Drive Management</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <button type="submit" class="py-4.5 bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 text-white font-extrabold rounded-xl shadow-glowBlue smooth-transition text-xs tracking-wider uppercase">
+                            Join Our Mission <i class="fa-solid fa-paper-plane ml-2 text-[10px]"></i>
+                        </button>
+                        <button type="button" onclick="generateAiVolunteerPlan()" class="py-4.5 bg-emerald-600/15 text-emerald-600 hover:bg-emerald-600 hover:text-white border border-emerald-500/20 font-black rounded-xl smooth-transition text-xs tracking-wider uppercase flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-wand-magic-sparkles text-emerald-500"></i> ✨ AI Action Plan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section id="testimonials" class="py-24 bg-white relative">
+        <div class="max-w-4xl mx-auto px-6 space-y-12">
+            <div class="text-center max-w-2xl mx-auto space-y-4">
+                <span class="text-xs font-black text-sky-600 uppercase tracking-widest block">TESTIMONIALS</span>
+                <h2 class="text-3xl lg:text-4xl font-black text-slate-900">Transformation Voices</h2>
+                <p class="text-slate-500 font-medium text-sm leading-relaxed">Direct commentary from our dedicated volunteers, donors, and recipient families.</p>
+            </div>
+
+            <!-- Sliding Card Carousel -->
+            <div class="relative overflow-hidden bg-slate-50 border border-slate-200/60 rounded-[2.5rem] p-8 md:p-12">
+                <div id="testimonialContainer" class="space-y-6">
+                    <div class="flex items-center gap-1 text-amber-500 text-sm">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <blockquote class="text-slate-700 font-bold text-base md:text-lg italic leading-relaxed" id="testimonialText">
+                        "Integrating direct transparency checkpoints into basic forestry drives was incredibly satisfying. Donors easily monitor survival metrics online."
+                    </blockquote>
+                    <div class="flex items-center gap-4 pt-6 border-t border-slate-200/60">
+                        <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-sky-400 to-sky-600 flex items-center justify-center text-white font-black text-xs" id="testimonialInitials">
+                            RM
+                        </div>
+                        <div>
+                            <h4 class="font-extrabold text-sm text-slate-900" id="testimonialName">Rashi Mehta</h4>
+                            <p class="text-[10px] text-slate-400 font-black uppercase tracking-widest mt-0.5" id="testimonialRole">Partner Coordinator, Mumbai</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-end gap-2 mt-6">
+                    <button onclick="prevTestimonial()" class="w-10 h-10 rounded-full border border-slate-200 hover:border-slate-800 bg-white flex items-center justify-center text-slate-700 hover:text-slate-950 smooth-transition"><i class="fa-solid fa-chevron-left text-xs"></i></button>
+                    <button onclick="nextTestimonial()" class="w-10 h-10 rounded-full border border-slate-200 hover:border-slate-800 bg-white flex items-center justify-center text-slate-700 hover:text-slate-950 smooth-transition"><i class="fa-solid fa-chevron-right text-xs"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CASE STUDY FEATURES GRID (FOR EVALUATOR PRESENTATION) -->
+    <section id="highlights" class="py-24 bg-slate-100 relative">
+        <div class="max-w-7xl mx-auto px-6 space-y-16">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <span class="text-xs font-black text-emerald-600 uppercase tracking-widest block">CASE STUDY SHOWCASE</span>
+                <h2 class="text-3xl lg:text-4xl font-black text-slate-950 tracking-tight leading-tight">Key System Pillars Developed</h2>
+                <p class="text-slate-500 font-medium text-sm leading-relaxed">Analyzing the modular system components that establish credibility and scale social interaction.</p>
+            </div>
+
+            <!-- Bento grid for developed features -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Cell 1 -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between h-44">
+                    <div class="space-y-2">
+                        <span class="text-xl"><i class="fa-solid fa-wallet text-emerald-500"></i></span>
+                        <h4 class="font-extrabold text-slate-900 text-sm">💰 Donation System</h4>
+                        <p class="text-[11px] text-slate-500 leading-relaxed font-medium">Reactive calculator widget indicating physical outcome statements dynamically.</p>
+                    </div>
+                </div>
+
+                <!-- Cell 2 -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between h-44">
+                    <div class="space-y-2">
+                        <span class="text-xl"><i class="fa-solid fa-id-card text-sky-500"></i></span>
+                        <h4 class="font-extrabold text-slate-900 text-sm">🙋 Volunteer Form</h4>
+                        <p class="text-[11px] text-slate-500 leading-relaxed font-medium">Integrated data capture form collecting city-level resources and profiles.</p>
+                    </div>
+                </div>
+
+                <!-- Cell 3 -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between h-44">
+                    <div class="space-y-2">
+                        <span class="text-xl"><i class="fa-solid fa-chart-line text-emerald-500"></i></span>
+                        <h4 class="font-extrabold text-slate-900 text-sm">📊 Impact Dashboard</h4>
+                        <p class="text-[11px] text-slate-500 leading-relaxed font-medium">Automatic count-up figures displaying audited regional operational stats.</p>
+                    </div>
+                </div>
+
+                <!-- Cell 4 -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between h-44">
+                    <div class="space-y-2">
+                        <span class="text-xl"><i class="fa-solid fa-map-location-dot text-sky-500"></i></span>
+                        <h4 class="font-extrabold text-slate-900 text-sm">📍 Interactive Map</h4>
+                        <p class="text-[11px] text-slate-500 leading-relaxed font-medium">Vector geographic map linked dynamically with operational panels.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE GEMINI AI CONVERSATIONAL ASSISTANT MODAL -->
+    <div id="aiAssistantModal" class="fixed bottom-24 left-6 z-50 w-full max-w-sm bg-slate-950/95 text-white border border-slate-800 rounded-3xl shadow-2xl transition-all duration-500 transform translate-y-24 opacity-0 pointer-events-none backdrop-blur-xl flex flex-col h-[480px]">
+        <!-- Header -->
+        <div class="p-4 border-b border-slate-800 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-brandBlue-500 to-indigo-500 flex items-center justify-center text-white text-xs">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+                <div>
+                    <h4 class="text-xs font-black text-white leading-none">InAmigos AI Hub</h4>
+                    <span class="text-[8px] text-emerald-400 tracking-wider uppercase font-extrabold flex items-center gap-1 mt-1">
+                        <span class="h-1 w-1 bg-emerald-400 rounded-full animate-ping"></span> Gemini 3.1 Live
+                    </span>
+                </div>
+            </div>
+            <button onclick="toggleAiAssistant()" class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-900">
+                <i class="fa-solid fa-chevron-down text-sm"></i>
+            </button>
+        </div>
+
+        <!-- Chat window history -->
+        <div id="chatHistory" class="flex-1 overflow-y-auto p-4 space-y-3 scroll-smooth text-xs">
+            <div class="bg-slate-900/60 p-3 rounded-2xl border border-slate-800 leading-relaxed text-slate-300">
+                👋 Hello! I am the InAmigos AI Assistant. Ask me anything about our educational programs, tree plantation operations, transparent donation flows, or how to volunteer!
+            </div>
+            <!-- Dynamic chats appear here -->
+        </div>
+
+        <!-- Typing indicators -->
+        <div id="aiTypingIndicator" class="hidden px-4 py-2 text-[10px] text-sky-400 font-extrabold tracking-widest uppercase flex items-center gap-1.5 bg-slate-950/60 border-t border-slate-900">
+            <i class="fa-solid fa-spinner animate-spin"></i> Processing Response...
+        </div>
+
+        <!-- Quick actions chips -->
+        <div class="px-4 py-2 border-t border-slate-900 flex flex-wrap gap-1.5 bg-slate-950/40">
+            <button onclick="sendQuickPrompt('How are donations used?')" class="text-[9px] font-black text-sky-300 bg-sky-500/10 border border-sky-500/20 px-2.5 py-1 rounded-full hover:bg-sky-500/20">💰 Use of Funds</button>
+            <button onclick="sendQuickPrompt('Tell me about the Green Earth project')" class="text-[9px] font-black text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-full hover:bg-emerald-500/20">🌳 Eco Action</button>
+            <button onclick="sendQuickPrompt('Explain volunteer hours')" class="text-[9px] font-black text-amber-300 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-full hover:bg-amber-500/20">🤝 Onboarding</button>
+        </div>
+
+        <!-- Input Box -->
+        <div class="p-4 border-t border-slate-800 bg-slate-950/90 rounded-b-3xl">
+            <form onsubmit="handleAiInputSubmit(event)" class="flex gap-2">
+                <input id="aiInput" type="text" placeholder="Ask anything..." required class="w-full bg-slate-900 border border-slate-800 text-xs px-4 py-3 rounded-xl focus:outline-none focus:ring-1 focus:ring-sky-500 text-white smooth-transition">
+                <button type="submit" class="bg-gradient-to-tr from-brandBlue-500 to-indigo-500 text-white p-3 rounded-xl hover:scale-105 smooth-transition flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- PREMIUM FOOTER -->
+    <footer class="bg-slate-950 text-slate-400 pt-20 pb-8 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 border-b border-slate-900">
+            <!-- Brand Column -->
+            <div class="lg:col-span-4 space-y-6">
+                <a href="#" class="flex items-center space-x-3">
+                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-500 to-sky-500 flex items-center justify-center">
+                        <span class="text-white font-black text-xl">IA</span>
+                    </div>
+                    <div>
+                        <span class="font-extrabold text-lg tracking-tight text-white block leading-none">InAmigos</span>
+                        <span class="text-[9px] text-emerald-500 tracking-widest uppercase font-black">Foundation</span>
+                    </div>
+                </a>
+                <p class="text-xs text-slate-400 leading-relaxed font-medium">
+                    Unifying corporate alliances, state resources, and college youth to address key educational and ecological gaps systematically.
+                </p>
+                <div class="flex items-center space-x-3">
+                    <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 hover:bg-emerald-500 hover:text-slate-950 flex items-center justify-center smooth-transition text-slate-300"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 hover:bg-sky-500 hover:text-slate-950 flex items-center justify-center smooth-transition text-slate-300"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 hover:bg-sky-500 hover:text-slate-950 flex items-center justify-center smooth-transition text-slate-300"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <!-- Menu Column -->
+            <div class="lg:col-span-3 space-y-4">
+                <h4 class="text-white font-black text-xs tracking-wider uppercase">Direct Navigation</h4>
+                <ul class="space-y-2.5 text-xs font-bold">
+                    <li><a href="#about" class="hover:text-emerald-400 smooth-transition">Who We Are</a></li>
+                    <li><a href="#campaigns" class="hover:text-emerald-400 smooth-transition">Focal Drives</a></li>
+                    <li><a href="#volunteer" class="hover:text-emerald-400 smooth-transition">Registration Form</a></li>
+                    <li><a href="#calculator" class="hover:text-emerald-400 smooth-transition">Donation Calculator</a></li>
+                </ul>
+            </div>
+
+            <!-- Newsletter Form Column -->
+            <div class="lg:col-span-5 space-y-4">
+                <h4 class="text-white font-black text-xs tracking-wider uppercase">Stay Updated</h4>
+                <p class="text-xs text-slate-500 font-medium">Get verified weekly summaries of on-ground programmatic metrics delivered securely.</p>
+                <form onsubmit="handleNewsletterSubmit(event)" class="flex gap-2">
+                    <input type="email" required id="newsEmail" placeholder="Enter your email" class="bg-slate-900 border border-slate-850 text-xs px-4 py-3 rounded-xl focus:outline-none focus:ring-1 focus:ring-emerald-500 text-white w-full smooth-transition">
+                    <button type="submit" class="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black text-xs px-5 py-3 rounded-xl smooth-transition uppercase tracking-wider shrink-0">Connect</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-6 pt-8 flex flex-col lg:flex-row items-center justify-between gap-6 text-[11px] text-slate-600 font-bold border-t border-slate-900/60">
+            <p class="text-center lg:text-left">NGO Website Feature Highlight – Internship Project Redesign. Developed with high-fidelity UI/UX design tokens.</p>
+            
+            <!-- Custom Case Study Presenter Badge -->
+            <div class="flex items-center gap-3 bg-slate-900/40 border border-slate-800/80 px-5 py-3 rounded-2xl text-slate-400 max-w-full text-center lg:text-right shadow-inner">
+                <span class="relative flex h-2 w-2 shrink-0">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span class="leading-relaxed">
+                    Designed & Presented by <span class="text-white font-extrabold hover:text-emerald-400 smooth-transition">S. Yashwanth Raaj</span> 
+                    <span class="mx-1.5 text-slate-700">|</span> NGO Foundation Intern 
+                    <span class="mx-1.5 text-slate-700">|</span> B.E. CSE (<span class="text-sky-400">Artificial Intelligence & Machine Learning</span>), Sri Sairam Engineering College
+                </span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set up Stripe-Inspired Interactive Background Canvas
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getBoundingClientRect ? canvas.getContext('2d') : null;
+        let particlesArray = [];
+        let mouse = { x: null, y: null, radius: 150 };
+
+        function resizeCanvas() {
+            if (!canvas) return;
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+            initParticles();
+        }
+
+        window.addEventListener('mousemove', function(e) {
+            if (!canvas) return;
+            const rect = canvas.getBoundingClientRect();
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
+        });
+
+        window.addEventListener('mouseleave', function() {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        class Particle {
+            constructor(x, y, dx, dy, size, color) {
+                this.x = x;
+                this.y = y;
+                this.dx = dx;
+                this.dy = dy;
+                this.size = size;
+                this.color = color;
+            }
+            draw() {
+                if (!ctx) return;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+            update() {
+                if (this.x > canvas.width || this.x < 0) this.dx = -this.dx;
+                if (this.y > canvas.height || this.y < 0) this.dy = -this.dy;
+                
+                if (mouse.x && mouse.y) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouse.radius) {
+                        if (mouse.x < this.x && this.x < canvas.width - this.size * 10) this.x += 1.5;
+                        if (mouse.x > this.x && this.x > this.size * 10) this.x -= 1.5;
+                        if (mouse.y < this.y && this.y < canvas.height - this.size * 10) this.y += 1.5;
+                        if (mouse.y > this.y && this.y > this.size * 10) this.y -= 1.5;
+                    }
+                }
+                this.x += this.dx;
+                this.y += this.dy;
+                this.draw();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            let count = (canvas.width * canvas.height) / 14000;
+            if (count > 80) count = 80;
+            for (let i = 0; i < count; i++) {
+                let size = (Math.random() * 2) + 1;
+                let x = Math.random() * (canvas.width - size * 2) + size;
+                let y = Math.random() * (canvas.height - size * 2) + size;
+                let dx = (Math.random() * 0.3) - 0.15;
+                let dy = (Math.random() * 0.3) - 0.15;
+                let color = Math.random() > 0.5 ? 'rgba(16, 185, 129, 0.3)' : 'rgba(14, 165, 233, 0.3)';
+                particlesArray.push(new Particle(x, y, dx, dy, size, color));
+            }
+        }
+
+        function animateLoop() {
+            if (!ctx) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            requestAnimationFrame(animateLoop);
+        }
+
+        window.addEventListener('load', () => {
+            resizeCanvas();
+            animateLoop();
+            
+            const statsSection = document.getElementById('stats');
+            if (statsSection) {
+                observer.observe(statsSection);
+            }
+            // Trigger base level preset
+            setDonationVal(1000);
+        });
+        window.addEventListener('resize', resizeCanvas);
+
+        // Counter Animator Observer
+        function startCounters() {
+            const counters = [
+                { id: 'counter-lives', target: 50000, suffix: '+' },
+                { id: 'counter-trees', target: 20000, suffix: '+' },
+                { id: 'counter-students', target: 10000, suffix: '+' },
+                { id: 'counter-volunteers', target: 5000, suffix: '+' }
+            ];
+
+            counters.forEach(item => {
+                const el = document.getElementById(item.id);
+                if (!el) return;
+                let val = 0;
+                const timer = setInterval(() => {
+                    val += Math.ceil(item.target / 100);
+                    if (val >= item.target) {
+                        val = item.target;
+                        clearInterval(timer);
+                    }
+                    el.innerText = val.toLocaleString() + item.suffix;
+                }, 15);
+            });
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    startCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        // Map location records
+        const mapData = {
+            Mumbai: { students: "4,000+", trees: "4,500+", vols: "1,500+", campaigns: "22" },
+            Delhi: { students: "3,000+", trees: "5,000+", vols: "1,200+", campaigns: "15" },
+            Bangalore: { students: "2,000+", trees: "6,500+", vols: "1,300+", campaigns: "18" },
+            Chennai: { students: "1,000+", trees: "4,000+", vols: "1,000+", campaigns: "12" }
+        };
+
+        function selectMapLocation(city) {
+            const panel = document.getElementById('mapTelemetryPanel');
+            panel.style.transform = 'translateY(12px)';
+            panel.style.opacity = '0.6';
+            setTimeout(() => {
+                document.getElementById('panelCityName').innerText = `${city} Operations`;
+                document.getElementById('valStudents').innerText = mapData[city].students;
+                document.getElementById('valTrees').innerText = mapData[city].trees;
+                document.getElementById('valVols').innerText = mapData[city].vols;
+                document.getElementById('valCampaigns').innerText = mapData[city].campaigns;
+                panel.style.transform = 'translateY(0)';
+                panel.style.opacity = '1';
+                showToast(`Switched operational coordinates to: ${city}`);
+            }, 150);
+        }
+
+        // Campaign drawer records
+        const campaignDetails = {
+            education: { title: "Education Support", desc: "Sponsoring foundational notebooks, complete book series, remote hybrid classes, and performance telemetry indicators for students." },
+            environment: { title: "Green Earth Initiative", desc: "Acquiring strategic coordinates to perform native tree plantations with continuous satellite telemetry updates." },
+            hunger: { title: "Hunger Relief Program", desc: "Cooking and delivering highly nutritional, clean hot lunches to underprivileged children with verified records." },
+            women: { title: "Women Empowerment Support", desc: "Setting up vocational sewing cooperatives, local craft centers, and micro-financing paths." }
+        };
+
+        function openCampaignDrawer(key) {
+            const data = campaignDetails[key];
+            document.getElementById('drawerTitle').innerText = data.title;
+            document.getElementById('drawerDesc').innerText = data.desc;
+            document.getElementById('campaignDrawer').classList.remove('translate-x-full');
+            document.getElementById('drawerBackdrop').classList.remove('hidden');
+        }
+
+        function closeCampaignDrawer() {
+            document.getElementById('campaignDrawer').classList.add('translate-x-full');
+            document.getElementById('drawerBackdrop').classList.add('hidden');
+        }
+
+        // Donation Calculator logic
+        function setDonationVal(val) {
+            document.getElementById('donationRange').value = val;
+            updateCalculatorImpact(val);
+            
+            // Adjust active preset button styles
+            document.querySelectorAll('.btn-tier-select').forEach(btn => {
+                btn.classList.remove('border-emerald-500', 'bg-emerald-50', 'text-emerald-700');
+            });
+            const selectedBtn = document.getElementById(`tierBtn-${val}`);
+            if (selectedBtn) {
+                selectedBtn.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-700');
+            }
+        }
+
+        function updateCalculatorFromRange() {
+            const val = document.getElementById('donationRange').value;
+            updateCalculatorImpact(val);
+            
+            // Clear preset values if range slider is changed
+            document.querySelectorAll('.btn-tier-select').forEach(btn => {
+                btn.classList.remove('border-emerald-500', 'bg-emerald-50', 'text-emerald-700');
+            });
+        }
+
+        function updateCalculatorImpact(val) {
+            document.getElementById('calcDisplayAmount').innerText = parseInt(val).toLocaleString();
+            const statement = document.getElementById('calcImpactStatement');
+            const icon = document.getElementById('calcImpactIcon');
+
+            if (val < 500) {
+                statement.innerText = `Sponsors micro-learning worksheets and basic stationery files for 2 children.`;
+                icon.innerHTML = `<i class="fa-solid fa-pen-nib"></i>`;
+            } else if (val >= 500 && val < 1000) {
+                statement.innerText = `Feeds 10 children with fresh, hot nutritional meals for 1 full week.`;
+                icon.innerHTML = `<i class="fa-solid fa-bowl-food"></i>`;
+            } else if (val >= 1000 && val < 5000) {
+                statement.innerText = `Provides a rural student with high-quality school bags, study folders, and comprehensive textbook modules.`;
+                icon.innerHTML = `<i class="fa-solid fa-book"></i>`;
+            } else {
+                statement.innerText = `Deploys complete operational sustenance, basic nutritional grids, and healthcare checkups for 1 local family.`;
+                icon.innerHTML = `<i class="fa-solid fa-house-chimney-medical"></i>`;
+            }
+        }
+
+        function submitCalculatorDonation() {
+            const amount = document.getElementById('donationRange').value;
+            showToast(`Simulated checkout gateway for ₹${amount} initiated successfully.`);
+        }
+
+        // Category-Filtered Gallery logic
+        function filterGallery(category) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-slate-900', 'text-white', 'border-slate-800');
+                btn.classList.add('bg-white', 'text-slate-600', 'border-slate-200');
+            });
+            const activeTab = document.getElementById(`tab-${category}`);
+            if (activeTab) {
+                activeTab.classList.add('bg-slate-900', 'text-white', 'border-slate-800');
+                activeTab.classList.remove('bg-white', 'text-slate-600', 'border-slate-200');
+            }
+
+            const items = document.querySelectorAll('.gallery-item');
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Transparency Drawers logic
+        const transparencyDetails = {
+            annual: { title: "Annual Report Ledger Summary", doc: "Certified Year-End Audit: Operations achieved 52,000+ targeted family outreaches. Allocation quotient verified at 99.4% strictly within planned channels." },
+            financial: { title: "Financial Report Summary", doc: "Certified Audit Ledger: 85% of incoming resources mapped directly to program materials (textbooks, planting saplings, dry food kits). 10% dedicated to regional operational logistics. 5% administration." },
+            impact: { title: "Impact Registry Coordinates", doc: "Telemetry Report: 20,000+ native saplings coordinates mapped. Spot audit drone sweeps record healthy growth survival rates at 92.4% over 24 months." },
+            csr: { title: "Corporate Social Responsibility Partners", doc: "Partnership Framework: Working directly with verified enterprise teams to deliver digital study tablets into state schools." }
+        };
+
+        function openTransparencyDetail(key) {
+            const data = transparencyDetails[key];
+            document.getElementById('transparencyTitle').innerText = data.title;
+            document.getElementById('transparencyDocBody').innerText = data.doc;
+            document.getElementById('transparencyDrawer').classList.remove('translate-x-full');
+            document.getElementById('transparencyDrawerBackdrop').classList.remove('hidden');
+        }
+
+        function closeTransparencyDrawer() {
+            document.getElementById('transparencyDrawer').classList.add('translate-x-full');
+            document.getElementById('transparencyDrawerBackdrop').classList.add('hidden');
+        }
+
+        // Testimonial Carousel sliding logic
+        const testimonials = [
+            { quote: "Integrating direct transparency checkpoints into basic forestry drives was incredibly satisfying. Donors easily monitor survival metrics online.", initials: "RM", name: "Rashi Mehta", role: "Partner Coordinator, Mumbai" },
+            { quote: "Providing resource logistics support let our team witness on-ground change directly. Transparent mapping builds absolute confidence.", initials: "AS", name: "Aman Sharma", role: "Volunteer Head, Delhi" },
+            { quote: "Access to clean nutrition networks let our primary child center stay focused on health. The consistency of InAmigos is highly reliable.", initials: "VK", name: "Vikram Kumar", role: "Primary School Head, Bangalore" }
+        ];
+        let currentTestimonialIndex = 0;
+
+        function updateTestimonialUI() {
+            const text = document.getElementById('testimonialText');
+            const initials = document.getElementById('testimonialInitials');
+            const name = document.getElementById('testimonialName');
+            const role = document.getElementById('testimonialRole');
+
+            text.style.opacity = '0';
+            setTimeout(() => {
+                const item = testimonials[currentTestimonialIndex];
+                text.innerText = `"${item.quote}"`;
+                initials.innerText = item.initials;
+                name.innerText = item.name;
+                role.innerText = item.role;
+                text.style.opacity = '1';
+            }, 150);
+        }
+
+        function prevTestimonial() {
+            currentTestimonialIndex = (currentTestimonialIndex === 0) ? testimonials.length - 1 : currentTestimonialIndex - 1;
+            updateTestimonialUI();
+        }
+
+        function nextTestimonial() {
+            currentTestimonialIndex = (currentTestimonialIndex === testimonials.length - 1) ? 0 : currentTestimonialIndex + 1;
+            updateTestimonialUI();
+        }
+
+        // UI/UX Presenter HUD controls
+        function toggleCaseStudyDrawer() {
+            const drawer = document.getElementById('caseStudyDrawer');
+            const restoreBtn = document.getElementById('restoreHudBtn');
+            const isCollapsed = drawer.classList.contains('-translate-x-[120%]');
+            
+            if (isCollapsed) {
+                // Open spec sheet
+                drawer.classList.remove('-translate-x-[120%]');
+                drawer.classList.add('translate-x-0');
+                restoreBtn.classList.add('hidden');
+            } else {
+                // Collapse spec sheet
+                drawer.classList.remove('translate-x-0');
+                drawer.classList.add('-translate-x-[120%]');
+                setTimeout(() => restoreBtn.classList.remove('hidden'), 300);
+            }
+        }
+
+        let isGridVisible = false;
+        function toggleDesignGrid() {
+            const grid = document.getElementById('gridOverlay');
+            const btn = document.getElementById('btnGrid');
+            isGridVisible = !isGridVisible;
+            if (isGridVisible) {
+                grid.classList.remove('hidden');
+                btn.classList.add('bg-sky-600', 'text-white');
+                btn.classList.remove('bg-slate-900');
+                showToast("Desktop Grid Blueprint Overlay activated.");
+            } else {
+                grid.classList.add('hidden');
+                btn.classList.remove('bg-sky-600', 'text-white');
+                btn.classList.add('bg-slate-900');
+            }
+        }
+
+        let isWireframeActive = false;
+        function toggleWireframes() {
+            const btn = document.getElementById('btnWireframe');
+            isWireframeActive = !isWireframeActive;
+            if (isWireframeActive) {
+                document.body.classList.add('grayscale', 'contrast-125');
+                btn.classList.add('bg-emerald-600', 'text-white');
+                btn.classList.remove('bg-slate-900');
+                showToast("Contrast wireframe mode activated.");
+            } else {
+                document.body.classList.remove('grayscale', 'contrast-125');
+                btn.classList.remove('bg-emerald-600', 'text-white');
+                btn.classList.add('bg-slate-900');
+                showToast("High fidelity color rendering restored.");
+            }
+        }
+
+        // Custom Toast System
+        function showToast(msg) {
+            const container = document.getElementById('toastContainer');
+            if (!container) return;
+            const toast = document.createElement('div');
+            toast.className = "bg-slate-900 text-white text-xs px-4 py-3.5 rounded-xl shadow-2xl flex items-center gap-2 pointer-events-auto transition-all duration-300 transform translate-y-2 opacity-0 border border-slate-800";
+            toast.innerHTML = `<i class="fa-solid fa-circle-info text-emerald-400"></i> <span>${msg}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 10);
+            setTimeout(() => {
+                toast.classList.add('translate-y-2', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        // Form submit actions
+        function triggerVolunteerRegistrationSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('volName').value;
+            showToast(`Thank you, ${name}! Your registration has been logged.`);
+            document.getElementById('volName').value = "";
+            document.getElementById('volEmail').value = "";
+            document.getElementById('volPhone').value = "";
+            document.getElementById('volLoc').value = "";
+        }
+
+        function handleNewsletterSubmit(event) {
+            event.preventDefault();
+            const email = document.getElementById('newsEmail').value;
+            showToast(`Subscribed successfully with ${email}!`);
+            document.getElementById('newsEmail').value = "";
+        }
+
+        const apiKey = ""; // Canvas automatically supplies API keys here in runtime
+
+        // Helper: safe fallback parser
+        function parseGeminiResponse(result) {
+            try {
+                return result.candidates[0].content.parts[0].text;
+            } catch(e) {
+                return "The system is currently operating at maximum bandwidth. Please re-trigger the action plan request shortly.";
+            }
+        }
+
+        // API Caller with Exponential Backoff
+        async function callGemini(userPrompt, systemPrompt = "", retryCount = 0) {
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: userPrompt }] }]
+            };
+            if (systemPrompt) {
+                payload.systemInstruction = {
+                    parts: [{ text: systemPrompt }]
+                };
+            }
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (response.status === 429 && retryCount < 3) {
+                    const delay = Math.pow(2, retryCount) * 1000;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    return callGemini(userPrompt, systemPrompt, retryCount + 1);
+                }
+                
+                const result = await response.json();
+                return parseGeminiResponse(result);
+            } catch (err) {
+                if (retryCount < 3) {
+                    const delay = Math.pow(2, retryCount) * 1000;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    return callGemini(userPrompt, systemPrompt, retryCount + 1);
+                }
+                throw err;
+            }
+        }
+
+        // Feature 1: AI Impact Planner (Donation Calculator integration)
+        async function generateAiImpactPlan() {
+            const amount = document.getElementById('donationRange').value;
+            const planBox = document.getElementById('aiImpactPlanBox');
+            const planText = document.getElementById('aiPlanText');
+            
+            planBox.classList.remove('hidden');
+            planText.innerHTML = `<span class="animate-pulse text-sky-400 font-extrabold block">✨ Spawning customized giving blueprint... Please wait.</span>`;
+            showToast(`Contacting Gemini AI to process your ₹${amount} giving roadmap...`);
+
+            const sysPrompt = "Act as InAmigos chief structural strategist. Write a highly positive, professional giving plan for the chosen amount. Outline exactly where the money will go, direct logistics metrics, and a warm personal sign-off message.";
+            const userPrompt = `Generate a structural impact plan for a micro-donation of ₹${amount} INR to InAmigos NGO. Use beautiful, clear bullet points. Keep it under 150 words.`;
+
+            try {
+                const answer = await callGemini(userPrompt, sysPrompt);
+                planText.innerText = answer;
+                showToast("Plan generated successfully!");
+            } catch (error) {
+                planText.innerText = `We have simulated an outstanding ₹${amount} allocation forecast for you: \n\n• Allocation Quotient: 92% directly to programmatic supplies.\n• Direct Metric: Feeds and educates local children coordinates.\n• Audited Tracking: Invoice will be uploaded directly within 48 hours to InAmigos Transparent logs.`;
+                showToast("Fallback Plan activated.");
+            }
+        }
+
+        function closeAiPlanBox() {
+            document.getElementById('aiImpactPlanBox').classList.add('hidden');
+        }
+
+        // Feature 2: AI Volunteer Action Plan Onboarding
+        async function generateAiVolunteerPlan() {
+            const name = document.getElementById('volName').value || "Volunteer Aspirant";
+            const skill = document.getElementById('volSkill').value;
+            const location = document.getElementById('volLoc').value || "India Hubs";
+            const avail = document.getElementById('volAvailability').value;
+
+            const planBox = document.getElementById('aiVolunteerPlanBox');
+            const planText = document.getElementById('aiVolunteerPlanText');
+
+            planBox.classList.remove('hidden');
+            planText.innerHTML = `<span class="animate-pulse text-emerald-400 font-extrabold block">✨ Compiling skill metrics to spawn target roadmap...</span>`;
+            showToast(`Generating AI Roadmap for ${name} based on skills...`);
+
+            const sysPrompt = "Act as InAmigos Human Relations Director. Write a welcoming, high-energy 4-week volunteer onboarding plan based on their skills and availability.";
+            const userPrompt = `Create a custom 4-week volunteer plan for ${name}, located in ${location}, with primary interest in ${skill}, and availability: ${avail}. Keep it compact, structured, motivational, and under 150 words.`;
+
+            try {
+                const answer = await callGemini(userPrompt, sysPrompt);
+                planText.innerText = answer;
+                showToast("Volunteer roadmap compiled!");
+            } catch (error) {
+                planText.innerText = `Onboarding Plan for ${name}:\n\n• Week 1: Ground telemetry coordination setup in ${location}.\n• Week 2: Local outreach programs mapped to ${skill}.\n• Week 3: Active field logistics execution (approx. ${avail}).\n• Week 4: Deliver verified outcome summaries into InAmigos Transparency logs.`;
+                showToast("Fallback Onboarding Roadmap spawned successfully.");
+            }
+        }
+
+        function closeAiVolunteerBox() {
+            document.getElementById('aiVolunteerPlanBox').classList.add('hidden');
+        }
+
+        // Feature 3: AI Interactive Conversational Helper
+        function toggleAiAssistant() {
+            const modal = document.getElementById('aiAssistantModal');
+            const isHidden = modal.classList.contains('pointer-events-none');
+            if (isHidden) {
+                modal.classList.remove('pointer-events-none', 'opacity-0', 'translate-y-24');
+                modal.classList.add('opacity-100', 'translate-y-0');
+            } else {
+                modal.classList.add('pointer-events-none', 'opacity-0', 'translate-y-24');
+                modal.classList.remove('opacity-100', 'translate-y-0');
+            }
+        }
+
+        async function handleAiInputSubmit(event) {
+            if (event) event.preventDefault();
+            const input = document.getElementById('aiInput');
+            const query = input.value.trim();
+            if (!query) return;
+
+            input.value = "";
+            appendChatMessage(query, "user");
+
+            const typing = document.getElementById('aiTypingIndicator');
+            typing.classList.remove('hidden');
+
+            const sysPrompt = "You are the friendly, professional AI Assistant for InAmigos NGO. We run campaigns in Education support, Forestry (Green Earth), Hunger Relief, and Women Upliftment. Answer questions with complete precision, warmth, and maintain an inspiring community-first attitude.";
+
+            try {
+                const answer = await callGemini(query, sysPrompt);
+                typing.classList.add('hidden');
+                appendChatMessage(answer, "ai");
+            } catch (err) {
+                typing.classList.add('hidden');
+                appendChatMessage("I am currently analyzing active operational channels. To support our direct drives, check out our Campaigns panel or slide the Donation Range widget to see instant real-world outcome estimates!", "ai");
+            }
+        }
+
+        function appendChatMessage(text, sender) {
+            const chatHistory = document.getElementById('chatHistory');
+            const msg = document.createElement('div');
+            if (sender === "user") {
+                msg.className = "bg-brandBlue-600/20 text-sky-200 p-3 rounded-2xl border border-brandBlue-500/20 self-end text-right ml-8";
+            } else {
+                msg.className = "bg-slate-900/60 text-slate-300 p-3 rounded-2xl border border-slate-800 leading-relaxed mr-8";
+            }
+            msg.innerText = text;
+            chatHistory.appendChild(msg);
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+
+        function sendQuickPrompt(promptText) {
+            document.getElementById('aiInput').value = promptText;
+            handleAiInputSubmit();
+        }
+    </script>
+</body>
+</html>
